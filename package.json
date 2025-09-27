@@ -1,8 +1,8 @@
 {
   "name": "@promptingcompany/tpc",
   "version": "0.0.1",
-  "description": "The official TypeScript library for the Tpc API",
-  "author": "Tpc <support@promptingco.com>",
+  "description": "The official TypeScript library for the The Prompting Company API",
+  "author": "The Prompting Company <support@promptingco.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",

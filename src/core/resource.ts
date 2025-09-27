@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { Tpc } from '../client';
+import type { ThePromptingCompany } from '../client';
 
 export abstract class APIResource {
-  protected _client: Tpc;
+  protected _client: ThePromptingCompany;
 
-  constructor(client: Tpc) {
+  constructor(client: ThePromptingCompany) {
     this._client = client;
   }
 }

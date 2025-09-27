@@ -54,7 +54,7 @@ export interface ClientOptions {
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['TPC_BASE_URL'].
+   * Defaults to process.env['THE_PROMPTING_COMPANY_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -108,7 +108,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['TPC_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['THE_PROMPTING_COMPANY_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -121,9 +121,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Tpc API.
+ * API Client for interfacing with the The Prompting Company API.
  */
-export class Tpc {
+export class ThePromptingCompany {
   apiKey: string;
 
   baseURL: string;
@@ -139,11 +139,11 @@ export class Tpc {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Tpc API.
+   * API Client for interfacing with the The Prompting Company API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['TPC_API_KEY'] ?? undefined]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
-   * @param {string} [opts.baseURL=process.env['TPC_BASE_URL'] ?? https://app.promptingcompany.com] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['THE_PROMPTING_COMPANY_BASE_URL'] ?? https://app.promptingcompany.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -152,13 +152,13 @@ export class Tpc {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('TPC_BASE_URL'),
+    baseURL = readEnv('THE_PROMPTING_COMPANY_BASE_URL'),
     apiKey = readEnv('TPC_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
-      throw new Errors.TpcError(
-        "The TPC_API_KEY environment variable is missing or empty; either provide it, or instantiate the Tpc client with an apiKey option, like new Tpc({ apiKey: 'My API Key' }).",
+      throw new Errors.ThePromptingCompanyError(
+        "The TPC_API_KEY environment variable is missing or empty; either provide it, or instantiate the ThePromptingCompany client with an apiKey option, like new ThePromptingCompany({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -170,20 +170,20 @@ export class Tpc {
     };
 
     if (baseURL && opts.environment) {
-      throw new Errors.TpcError(
-        'Ambiguous URL; The `baseURL` option (or TPC_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      throw new Errors.ThePromptingCompanyError(
+        'Ambiguous URL; The `baseURL` option (or THE_PROMPTING_COMPANY_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
       );
     }
 
     this.baseURL = options.baseURL || environments[options.environment || 'production'];
-    this.timeout = options.timeout ?? Tpc.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? ThePromptingCompany.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('TPC_LOG'), "process.env['TPC_LOG']", this) ??
+      parseLogLevel(readEnv('THE_PROMPTING_COMPANY_LOG'), "process.env['THE_PROMPTING_COMPANY_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -247,7 +247,7 @@ export class Tpc {
         if (value === null) {
           return `${encodeURIComponent(key)}=`;
         }
-        throw new Errors.TpcError(
+        throw new Errors.ThePromptingCompanyError(
           `Cannot stringify type ${typeof value}; Expected string, number, boolean, or null. If you need to pass nested query parameters, you can manually encode them, e.g. { query: { 'foo[key1]': value1, 'foo[key2]': value2 } }, and please open a GitHub issue requesting better support for your use case.`,
         );
       })
@@ -719,10 +719,10 @@ export class Tpc {
     }
   }
 
-  static Tpc = this;
+  static ThePromptingCompany = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static TpcError = Errors.TpcError;
+  static ThePromptingCompanyError = Errors.ThePromptingCompanyError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -741,9 +741,9 @@ export class Tpc {
   document: API.Document = new API.Document(this);
 }
 
-Tpc.Document = Document;
+ThePromptingCompany.Document = Document;
 
-export declare namespace Tpc {
+export declare namespace ThePromptingCompany {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
