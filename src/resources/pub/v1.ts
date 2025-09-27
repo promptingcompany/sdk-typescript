@@ -26,21 +26,15 @@ export class V1 extends APIResource {
 }
 
 export interface V1RetrieveAgenticDocumentResponse {
-  /**
-   * An agentic document containing processed content
-   */
   data?: V1RetrieveAgenticDocumentResponse.Data;
 
   ok?: boolean;
 }
 
 export namespace V1RetrieveAgenticDocumentResponse {
-  /**
-   * An agentic document containing processed content
-   */
   export interface Data {
     /**
-     * Unique identifier for the document
+     * Unique identifier for the agentic document
      */
     id: string;
 
@@ -50,7 +44,7 @@ export namespace V1RetrieveAgenticDocumentResponse {
     brandId: string;
 
     /**
-     * Main content of the document
+     * Main content of the document in markdown format
      */
     content: string;
 
@@ -60,19 +54,29 @@ export namespace V1RetrieveAgenticDocumentResponse {
     createdAt: string;
 
     /**
-     * File path or slug for the document
+     * File path alias used as slug for the document
      */
     filePath: string;
 
     /**
-     * Original source URL of the document
+     * Whether this document was manually created or automatically scraped
+     */
+    isManual: boolean;
+
+    /**
+     * Original source URL where the content was scraped from
      */
     sourceUrl: string;
 
     /**
-     * Title of the document
+     * Title of the agentic document
      */
     title: string;
+
+    /**
+     * Type classification of the document
+     */
+    type: 'shadow' | 'manual' | 'scraped';
 
     /**
      * Timestamp when the document was last updated
@@ -80,9 +84,104 @@ export namespace V1RetrieveAgenticDocumentResponse {
     updatedAt: string;
 
     /**
+     * Canonical URL for duplicate content management
+     */
+    canonicalUrl?: string | null;
+
+    /**
+     * CSS selector for elements to exclude during scraping
+     */
+    cssExcludeSelector?: string | null;
+
+    /**
+     * CSS selector used for content extraction during scraping
+     */
+    cssSelector?: string | null;
+
+    /**
      * Timestamp when the document was soft deleted (null if not deleted)
      */
     deletedAt?: string | null;
+
+    /**
+     * Short description or summary of the document
+     */
+    description?: string | null;
+
+    /**
+     * Special description intended for AI agent processing
+     */
+    descriptionForAgent?: string | null;
+
+    /**
+     * URL of the featured image for the document
+     */
+    image?: string | null;
+
+    /**
+     * Timestamp when the document was last indexed for search
+     */
+    lastIndexedAt?: string | null;
+
+    /**
+     * Additional SEO metadata or structured data (schema.org)
+     */
+    metadata?: unknown | null;
+
+    /**
+     * Custom meta description for SEO optimization
+     */
+    metaDescription?: string | null;
+
+    /**
+     * Custom HTML title tag for SEO optimization
+     */
+    metaTitle?: string | null;
+
+    /**
+     * Whether to add noindex meta tag for search engines
+     */
+    noIndex?: boolean | null;
+
+    /**
+     * Open Graph description for social media sharing
+     */
+    ogDescription?: string | null;
+
+    /**
+     * Open Graph image URL for social media sharing
+     */
+    ogImage?: string | null;
+
+    /**
+     * Open Graph title for social media sharing
+     */
+    ogTitle?: string | null;
+
+    /**
+     * Checksum of the source content for change detection
+     */
+    sourceChecksum?: string | null;
+
+    /**
+     * TipTap editor JSON content representation
+     */
+    tiptapJson?: unknown | null;
+
+    /**
+     * Twitter card description for Twitter sharing
+     */
+    twitterDescription?: string | null;
+
+    /**
+     * Twitter card image URL for Twitter sharing
+     */
+    twitterImage?: string | null;
+
+    /**
+     * Twitter card title for Twitter sharing
+     */
+    twitterTitle?: string | null;
   }
 }
 
