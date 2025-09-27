@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { ThePromptingCompany } from '@promptingcompany/tpc';
+import { ThePromptingCompany } from '@promptingcompany/sdk';
 
 const { stringifyQuery } = ThePromptingCompany.prototype as any;
 

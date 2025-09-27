@@ -55,12 +55,12 @@ $ cd tpc-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link @promptingcompany/tpc
+$ yarn link @promptingcompany/sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @promptingcompany/tpc
+$ pnpm link -—global @promptingcompany/sdk
 ```
 
 ## Running tests

@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from '@promptingcompany/tpc/internal/uploads';
-import { toFile } from '@promptingcompany/tpc/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@promptingcompany/sdk/internal/uploads';
+import { toFile } from '@promptingcompany/sdk/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
