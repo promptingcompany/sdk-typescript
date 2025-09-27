@@ -1,8 +1,8 @@
-# Tpc TypeScript API Library
+# The Prompting Company TypeScript API Library
 
 [![NPM version](<https://img.shields.io/npm/v/@promptingcompany/tpc.svg?label=npm%20(stable)>)](https://npmjs.org/package/@promptingcompany/tpc) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@promptingcompany/tpc)
 
-This library provides convenient access to the Tpc REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the The Prompting Company REST API from server-side TypeScript or JavaScript.
 
 The REST API documentation can be found on [promptingcompany.com](https://promptingcompany.com/support). The full API of this library can be found in [api.md](api.md).
 
@@ -23,9 +23,9 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Tpc from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/tpc';
 
-const client = new Tpc({
+const client = new ThePromptingCompany({
   apiKey: process.env['TPC_API_KEY'], // This is the default and can be omitted
   environment: 'dev', // defaults to 'production'
 });
@@ -41,14 +41,14 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Tpc from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/tpc';
 
-const client = new Tpc({
+const client = new ThePromptingCompany({
   apiKey: process.env['TPC_API_KEY'], // This is the default and can be omitted
   environment: 'dev', // defaults to 'production'
 });
 
-const document: Tpc.DocumentGetResponse = await client.document.get('REPLACE_ME');
+const document: ThePromptingCompany.DocumentGetResponse = await client.document.get('REPLACE_ME');
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -62,7 +62,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const document = await client.document.get('REPLACE_ME').catch(async (err) => {
-  if (err instanceof Tpc.APIError) {
+  if (err instanceof ThePromptingCompany.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
     console.log(err.headers); // {server: 'nginx', ...}
@@ -96,7 +96,7 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new Tpc({
+const client = new ThePromptingCompany({
   maxRetries: 0, // default is 2
 });
 
@@ -113,7 +113,7 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new Tpc({
+const client = new ThePromptingCompany({
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
@@ -139,7 +139,7 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new Tpc();
+const client = new ThePromptingCompany();
 
 const response = await client.document.get('REPLACE_ME').asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -160,13 +160,13 @@ console.log(document.data);
 
 The log level can be configured in two ways:
 
-1. Via the `TPC_LOG` environment variable
+1. Via the `THE_PROMPTING_COMPANY_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Tpc from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/tpc';
 
-const client = new Tpc({
+const client = new ThePromptingCompany({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -192,13 +192,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Tpc from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/tpc';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new Tpc({
-  logger: logger.child({ name: 'Tpc' }),
+const client = new ThePromptingCompany({
+  logger: logger.child({ name: 'ThePromptingCompany' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -261,10 +261,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Tpc from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/tpc';
 import fetch from 'my-fetch';
 
-const client = new Tpc({ fetch });
+const client = new ThePromptingCompany({ fetch });
 ```
 
 ### Fetch options
@@ -272,9 +272,9 @@ const client = new Tpc({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Tpc from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/tpc';
 
-const client = new Tpc({
+const client = new ThePromptingCompany({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -289,11 +289,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Tpc from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/tpc';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new Tpc({
+const client = new ThePromptingCompany({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -303,9 +303,9 @@ const client = new Tpc({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Tpc from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/tpc';
 
-const client = new Tpc({
+const client = new ThePromptingCompany({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -315,10 +315,10 @@ const client = new Tpc({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Tpc from 'npm:@promptingcompany/tpc';
+import ThePromptingCompany from 'npm:@promptingcompany/tpc';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new Tpc({
+const client = new ThePromptingCompany({
   fetchOptions: {
     client: httpClient,
   },

@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Tpc } from '@promptingcompany/tpc';
+import { ThePromptingCompany } from '@promptingcompany/tpc';
 
-const { stringifyQuery } = Tpc.prototype as any;
+const { stringifyQuery } = ThePromptingCompany.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

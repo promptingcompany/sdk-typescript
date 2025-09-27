@@ -16,9 +16,9 @@ before making any information public.
 ## Reporting Non-SDK Related Security Issues
 
 If you encounter security issues that are not directly related to SDKs but pertain to the services
-or products provided by Tpc, please follow the respective company's security reporting guidelines.
+or products provided by The Prompting Company, please follow the respective company's security reporting guidelines.
 
-### Tpc Terms and Policies
+### The Prompting Company Terms and Policies
 
 Please contact support@promptingco.com for any questions or concerns regarding the security of our services.
 
