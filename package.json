@@ -1,6 +1,6 @@
 {
   "name": "@promptingcompany/sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The official TypeScript library for the The Prompting Company API",
   "author": "The Prompting Company <support@promptingco.com>",
   "types": "dist/index.d.ts",
