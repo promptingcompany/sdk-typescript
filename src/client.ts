@@ -232,13 +232,6 @@ export class Tpc {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    if (this.apiKey && values.get('x-api-key')) {
-      return;
-    }
-    if (nulls.has('x-api-key')) {
-      return;
-    }
-
     if (this.bearerToken && values.get('authorization')) {
       return;
     }
@@ -247,22 +240,11 @@ export class Tpc {
     }
 
     throw new Error(
-      'Could not resolve authentication method. Expected either apiKey or bearerToken to be set. Or for one of the "x-api-key" or "Authorization" headers to be explicitly omitted',
+      'Could not resolve authentication method. Expected the bearerToken to be set. Or for the "Authorization" headers to be explicitly omitted',
     );
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([await this.apiKeyAuth(opts), await this.bearerAuth(opts)]);
-  }
-
-  protected async apiKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (this.apiKey == null) {
-      return undefined;
-    }
-    return buildHeaders([{ 'x-api-key': this.apiKey }]);
-  }
-
-  protected async bearerAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     if (this.bearerToken == null) {
       return undefined;
     }
