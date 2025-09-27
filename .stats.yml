@@ -1,4 +1,4 @@
 configured_endpoints: 2
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/the-prompting-company%2Ftpc-67c54044508c4fb6ccab5a3336aa7d296786ca2823dd447f18589a7ea3c4ed68.yml
-openapi_spec_hash: cdfa57f25a5d0a93bcc4ef903b6243a8
-config_hash: 4ef47561344a9273bccb9d6ed64ef25b
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/the-prompting-company%2Ftpc-7b79aaca91370d67f74293f59671e787f6aa892497dc8a3121216c1aa9473c71.yml
+openapi_spec_hash: 94db7f9c48fc625b30c1d0713a66754a
+config_hash: 541c13488194010775ec5db46d2f5c9e

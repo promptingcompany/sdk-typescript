@@ -43,6 +43,16 @@ export interface ClientOptions {
   apiKey?: string | undefined;
 
   /**
+   * Defaults to process.env['TPC_ORGANIZATION_ID'].
+   */
+  organizationID?: string | undefined;
+
+  /**
+   * Defaults to process.env['TPC_PRODUCT_ID'].
+   */
+  productID?: string | undefined;
+
+  /**
    * Specifies the environment to use for the API.
    *
    * Each environment maps to a different base URL:
@@ -125,6 +135,8 @@ export interface ClientOptions {
  */
 export class ThePromptingCompany {
   apiKey: string;
+  organizationID: string;
+  productID: string;
 
   baseURL: string;
   maxRetries: number;
@@ -142,6 +154,8 @@ export class ThePromptingCompany {
    * API Client for interfacing with the The Prompting Company API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['TPC_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.organizationID=process.env['TPC_ORGANIZATION_ID'] ?? undefined]
+   * @param {string | undefined} [opts.productID=process.env['TPC_PRODUCT_ID'] ?? undefined]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['THE_PROMPTING_COMPANY_BASE_URL'] ?? https://app.promptingcompany.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -154,6 +168,8 @@ export class ThePromptingCompany {
   constructor({
     baseURL = readEnv('THE_PROMPTING_COMPANY_BASE_URL'),
     apiKey = readEnv('TPC_API_KEY'),
+    organizationID = readEnv('TPC_ORGANIZATION_ID'),
+    productID = readEnv('TPC_PRODUCT_ID'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -161,9 +177,21 @@ export class ThePromptingCompany {
         "The TPC_API_KEY environment variable is missing or empty; either provide it, or instantiate the ThePromptingCompany client with an apiKey option, like new ThePromptingCompany({ apiKey: 'My API Key' }).",
       );
     }
+    if (organizationID === undefined) {
+      throw new Errors.ThePromptingCompanyError(
+        "The TPC_ORGANIZATION_ID environment variable is missing or empty; either provide it, or instantiate the ThePromptingCompany client with an organizationID option, like new ThePromptingCompany({ organizationID: 'My Organization ID' }).",
+      );
+    }
+    if (productID === undefined) {
+      throw new Errors.ThePromptingCompanyError(
+        "The TPC_PRODUCT_ID environment variable is missing or empty; either provide it, or instantiate the ThePromptingCompany client with an productID option, like new ThePromptingCompany({ productID: 'My Product ID' }).",
+      );
+    }
 
     const options: ClientOptions = {
       apiKey,
+      organizationID,
+      productID,
       ...opts,
       baseURL,
       environment: opts.environment ?? 'production',
@@ -193,6 +221,8 @@ export class ThePromptingCompany {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.organizationID = organizationID;
+    this.productID = productID;
   }
 
   /**
@@ -210,6 +240,8 @@ export class ThePromptingCompany {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      organizationID: this.organizationID,
+      productID: this.productID,
       ...options,
     });
     return client;
@@ -670,6 +702,8 @@ export class ThePromptingCompany {
         'X-Stainless-Retry-Count': String(retryCount),
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
+        'X-Tpc-Organization-Id': this.organizationID,
+        'X-Tpc-Product-Id': this.productID,
       },
       await this.authHeaders(options),
       this._options.defaultHeaders,
