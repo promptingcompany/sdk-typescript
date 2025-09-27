@@ -31,7 +31,7 @@ import {
 import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
-  production: 'https://app.promptingcompany.com',
+  production: 'https://app.promptingco.com',
   dev: 'http://app.localhost:3000',
 };
 type Environment = keyof typeof environments;
@@ -66,7 +66,7 @@ export interface ClientOptions {
    * Specifies the environment to use for the API.
    *
    * Each environment maps to a different base URL:
-   * - `production` corresponds to `https://app.promptingcompany.com`
+   * - `production` corresponds to `https://app.promptingco.com`
    * - `dev` corresponds to `http://app.localhost:3000`
    */
   environment?: Environment | undefined;
@@ -171,7 +171,7 @@ export class ThePromptingCompany {
    * @param {string | null | undefined} [opts.productID=process.env['TPC_PRODUCT_ID'] ?? null]
    * @param {string | null | undefined} [opts.productSlug=process.env['TPC_PRODUCT_SLUG'] ?? null]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
-   * @param {string} [opts.baseURL=process.env['THE_PROMPTING_COMPANY_BASE_URL'] ?? https://app.promptingcompany.com] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['THE_PROMPTING_COMPANY_BASE_URL'] ?? https://app.promptingco.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.

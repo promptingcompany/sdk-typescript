@@ -312,13 +312,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['THE_PROMPTING_COMPANY_BASE_URL'] = ''; // empty
       const client = new ThePromptingCompany({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://app.promptingcompany.com');
+      expect(client.baseURL).toEqual('https://app.promptingco.com');
     });
 
     test('blank env variable', () => {
       process.env['THE_PROMPTING_COMPANY_BASE_URL'] = '  '; // blank
       const client = new ThePromptingCompany({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://app.promptingcompany.com');
+      expect(client.baseURL).toEqual('https://app.promptingco.com');
     });
 
     test('env variable with environment', () => {
@@ -335,7 +335,7 @@ describe('instantiate client', () => {
         baseURL: null,
         environment: 'production',
       });
-      expect(client.baseURL).toEqual('https://app.promptingcompany.com');
+      expect(client.baseURL).toEqual('https://app.promptingco.com');
     });
 
     test('in request options', () => {
