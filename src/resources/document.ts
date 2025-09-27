@@ -25,12 +25,12 @@ export class Document extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.document.retrieveByPath(
+   * const response = await client.document.getByPath(
    *   'getting-started/installation',
    * );
    * ```
    */
-  retrieveByPath(path_: string, options?: RequestOptions): APIPromise<DocumentRetrieveByPathResponse> {
+  getByPath(path_: string, options?: RequestOptions): APIPromise<DocumentGetByPathResponse> {
     return this._client.get(path`/api/pub/v1/md/by-path/${path_}`, options);
   }
 }
@@ -195,13 +195,13 @@ export namespace DocumentGetResponse {
   }
 }
 
-export interface DocumentRetrieveByPathResponse {
-  data?: DocumentRetrieveByPathResponse.Data;
+export interface DocumentGetByPathResponse {
+  data?: DocumentGetByPathResponse.Data;
 
   ok?: boolean;
 }
 
-export namespace DocumentRetrieveByPathResponse {
+export namespace DocumentGetByPathResponse {
   export interface Data {
     /**
      * Unique identifier for the agentic document
@@ -358,6 +358,6 @@ export namespace DocumentRetrieveByPathResponse {
 export declare namespace Document {
   export {
     type DocumentGetResponse as DocumentGetResponse,
-    type DocumentRetrieveByPathResponse as DocumentRetrieveByPathResponse,
+    type DocumentGetByPathResponse as DocumentGetByPathResponse,
   };
 }

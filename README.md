@@ -27,9 +27,9 @@ const client = new ThePromptingCompany({
   environment: 'dev', // defaults to 'production'
 });
 
-const document = await client.document.get('REPLACE_ME');
+const response = await client.document.getByPath('REPLACE_ME');
 
-console.log(document.data);
+console.log(response.data);
 ```
 
 ### Request & Response types
@@ -224,7 +224,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.document.get({
+client.document.getByPath({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
