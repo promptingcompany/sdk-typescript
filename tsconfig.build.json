@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "tpc/*": ["./dist/src/*"],
-      "tpc": ["./dist/src/index.ts"]
+      "@promptingcompany/tpc/*": ["./dist/src/*"],
+      "@promptingcompany/tpc": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "tpc/*": ["./src/*"],
-      "tpc": ["./src/index.ts"]
+      "@promptingcompany/tpc/*": ["./src/*"],
+      "@promptingcompany/tpc": ["./src/index.ts"]
     },
     "noEmit": true,
 
