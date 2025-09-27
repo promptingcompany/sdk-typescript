@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^@promptingcompany/tpc(/.*)?',
+              regex: '^@promptingcompany/sdk(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

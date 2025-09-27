@@ -1,5 +1,5 @@
 {
-  "name": "@promptingcompany/tpc",
+  "name": "@promptingcompany/sdk",
   "version": "0.0.1",
   "description": "The official TypeScript library for the The Prompting Company API",
   "author": "The Prompting Company <support@promptingco.com>",

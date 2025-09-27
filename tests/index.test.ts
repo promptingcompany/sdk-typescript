@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from '@promptingcompany/tpc/core/api-promise';
+import { APIPromise } from '@promptingcompany/sdk/core/api-promise';
 
 import util from 'node:util';
-import ThePromptingCompany from '@promptingcompany/tpc';
-import { APIUserAbortError } from '@promptingcompany/tpc';
+import ThePromptingCompany from '@promptingcompany/sdk';
+import { APIUserAbortError } from '@promptingcompany/sdk';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
