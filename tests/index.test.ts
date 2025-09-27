@@ -24,6 +24,8 @@ describe('instantiate client', () => {
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
       apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
     });
 
     test('they are used in the request', async () => {
@@ -87,14 +89,24 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new ThePromptingCompany({ logger: logger, logLevel: 'debug', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        logLevel: 'debug',
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).toHaveBeenCalled();
     });
 
     test('default logLevel is warn', async () => {
-      const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.logLevel).toBe('warn');
     });
 
@@ -107,7 +119,13 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new ThePromptingCompany({ logger: logger, logLevel: 'info', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        logLevel: 'info',
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -123,7 +141,12 @@ describe('instantiate client', () => {
       };
 
       process.env['THE_PROMPTING_COMPANY_LOG'] = 'debug';
-      const client = new ThePromptingCompany({ logger: logger, apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.logLevel).toBe('debug');
 
       await forceAPIResponseForClient(client);
@@ -140,7 +163,12 @@ describe('instantiate client', () => {
       };
 
       process.env['THE_PROMPTING_COMPANY_LOG'] = 'not a log level';
-      const client = new ThePromptingCompany({ logger: logger, apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
         'process.env[\'THE_PROMPTING_COMPANY_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
@@ -157,7 +185,13 @@ describe('instantiate client', () => {
       };
 
       process.env['THE_PROMPTING_COMPANY_LOG'] = 'debug';
-      const client = new ThePromptingCompany({ logger: logger, logLevel: 'off', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        logLevel: 'off',
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -173,7 +207,13 @@ describe('instantiate client', () => {
       };
 
       process.env['THE_PROMPTING_COMPANY_LOG'] = 'not a log level';
-      const client = new ThePromptingCompany({ logger: logger, logLevel: 'debug', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        logLevel: 'debug',
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.logLevel).toBe('debug');
       expect(warnMock).not.toHaveBeenCalled();
     });
@@ -185,6 +225,8 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -194,6 +236,8 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
@@ -203,6 +247,8 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
       });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
@@ -212,6 +258,8 @@ describe('instantiate client', () => {
     const client = new ThePromptingCompany({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -230,6 +278,8 @@ describe('instantiate client', () => {
     const client = new ThePromptingCompany({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
       fetch: defaultFetch,
     });
   });
@@ -238,6 +288,8 @@ describe('instantiate client', () => {
     const client = new ThePromptingCompany({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
       apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -270,6 +322,8 @@ describe('instantiate client', () => {
     const client = new ThePromptingCompany({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
       fetch: testFetch,
     });
 
@@ -282,6 +336,8 @@ describe('instantiate client', () => {
       const client = new ThePromptingCompany({
         baseURL: 'http://localhost:5000/custom/path/',
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
@@ -290,6 +346,8 @@ describe('instantiate client', () => {
       const client = new ThePromptingCompany({
         baseURL: 'http://localhost:5000/custom/path',
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
@@ -299,25 +357,42 @@ describe('instantiate client', () => {
     });
 
     test('explicit option', () => {
-      const client = new ThePromptingCompany({ baseURL: 'https://example.com', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        baseURL: 'https://example.com',
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['THE_PROMPTING_COMPANY_BASE_URL'] = 'https://example.com/from_env';
-      const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['THE_PROMPTING_COMPANY_BASE_URL'] = ''; // empty
-      const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.baseURL).toEqual('https://app.promptingcompany.com');
     });
 
     test('blank env variable', () => {
       process.env['THE_PROMPTING_COMPANY_BASE_URL'] = '  '; // blank
-      const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.baseURL).toEqual('https://app.promptingcompany.com');
     });
 
@@ -325,13 +400,21 @@ describe('instantiate client', () => {
       process.env['THE_PROMPTING_COMPANY_BASE_URL'] = 'https://example.com/from_env';
 
       expect(
-        () => new ThePromptingCompany({ apiKey: 'My API Key', environment: 'production' }),
+        () =>
+          new ThePromptingCompany({
+            apiKey: 'My API Key',
+            organizationID: 'My Organization ID',
+            productID: 'My Product ID',
+            environment: 'production',
+          }),
       ).toThrowErrorMatchingInlineSnapshot(
         `"Ambiguous URL; The \`baseURL\` option (or THE_PROMPTING_COMPANY_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
       );
 
       const client = new ThePromptingCompany({
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
         baseURL: null,
         environment: 'production',
       });
@@ -339,7 +422,11 @@ describe('instantiate client', () => {
     });
 
     test('in request options', () => {
-      const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
@@ -348,6 +435,8 @@ describe('instantiate client', () => {
     test('in request options overridden by client options', () => {
       const client = new ThePromptingCompany({
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
         baseURL: 'http://localhost:5000/client',
       });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
@@ -357,7 +446,11 @@ describe('instantiate client', () => {
 
     test('in request options overridden by env variable', () => {
       process.env['THE_PROMPTING_COMPANY_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
+      });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -365,11 +458,20 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new ThePromptingCompany({ maxRetries: 4, apiKey: 'My API Key' });
+    const client = new ThePromptingCompany({
+      maxRetries: 4,
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+    });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new ThePromptingCompany({ apiKey: 'My API Key' });
+    const client2 = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+    });
     expect(client2.maxRetries).toEqual(2);
   });
 
@@ -379,6 +481,8 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         maxRetries: 3,
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
       });
 
       const newClient = client.withOptions({
@@ -405,6 +509,8 @@ describe('instantiate client', () => {
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
       });
 
       const newClient = client.withOptions({
@@ -423,6 +529,8 @@ describe('instantiate client', () => {
         baseURL: 'http://localhost:5000/',
         timeout: 1000,
         apiKey: 'My API Key',
+        organizationID: 'My Organization ID',
+        productID: 'My Product ID',
       });
 
       // Modify the client properties directly after creation
@@ -452,20 +560,36 @@ describe('instantiate client', () => {
   test('with environment variable arguments', () => {
     // set options via env var
     process.env['TPC_API_KEY'] = 'My API Key';
+    process.env['TPC_ORGANIZATION_ID'] = 'My Organization ID';
+    process.env['TPC_PRODUCT_ID'] = 'My Product ID';
     const client = new ThePromptingCompany();
     expect(client.apiKey).toBe('My API Key');
+    expect(client.organizationID).toBe('My Organization ID');
+    expect(client.productID).toBe('My Product ID');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
     process.env['TPC_API_KEY'] = 'another My API Key';
-    const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+    process.env['TPC_ORGANIZATION_ID'] = 'another My Organization ID';
+    process.env['TPC_PRODUCT_ID'] = 'another My Product ID';
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+    });
     expect(client.apiKey).toBe('My API Key');
+    expect(client.organizationID).toBe('My Organization ID');
+    expect(client.productID).toBe('My Product ID');
   });
 });
 
 describe('request building', () => {
-  const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+  const client = new ThePromptingCompany({
+    apiKey: 'My API Key',
+    organizationID: 'My Organization ID',
+    productID: 'My Product ID',
+  });
 
   describe('custom headers', () => {
     test('handles undefined', async () => {
@@ -484,7 +608,11 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new ThePromptingCompany({ apiKey: 'My API Key' });
+  const client = new ThePromptingCompany({
+    apiKey: 'My API Key',
+    organizationID: 'My Organization ID',
+    productID: 'My Product ID',
+  });
 
   class Serializable {
     toJSON() {
@@ -569,7 +697,13 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', timeout: 10, fetch: testFetch });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+      timeout: 10,
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -599,7 +733,13 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
 
@@ -623,7 +763,13 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -654,6 +800,8 @@ describe('retries', () => {
     };
     const client = new ThePromptingCompany({
       apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
       fetch: testFetch,
       maxRetries: 4,
       defaultHeaders: { 'X-Stainless-Retry-Count': null },
@@ -685,7 +833,13 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -715,7 +869,12 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', fetch: testFetch });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -745,7 +904,12 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', fetch: testFetch });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      organizationID: 'My Organization ID',
+      productID: 'My Product ID',
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);

@@ -4,6 +4,8 @@ import ThePromptingCompany from '@promptingcompany/sdk';
 
 const client = new ThePromptingCompany({
   apiKey: 'My API Key',
+  organizationID: 'My Organization ID',
+  productID: 'My Product ID',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
