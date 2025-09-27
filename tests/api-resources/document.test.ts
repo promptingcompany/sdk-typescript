@@ -21,8 +21,8 @@ describe('resource document', () => {
   });
 
   // Prism tests are disabled
-  test.skip('retrieveByPath', async () => {
-    const responsePromise = client.document.retrieveByPath('getting-started/installation');
+  test.skip('getByPath', async () => {
+    const responsePromise = client.document.getByPath('getting-started/installation');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
