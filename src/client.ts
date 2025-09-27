@@ -38,14 +38,9 @@ type Environment = keyof typeof environments;
 
 export interface ClientOptions {
   /**
-   * API key for authentication
+   * API key authentication using Bearer token in Authorization header
    */
-  apiKey?: string | null | undefined;
-
-  /**
-   * JWT token for authenticated requests
-   */
-  bearerToken?: string | null | undefined;
+  apiKey?: string | undefined;
 
   /**
    * Specifies the environment to use for the API.
@@ -129,8 +124,7 @@ export interface ClientOptions {
  * API Client for interfacing with the Tpc API.
  */
 export class Tpc {
-  apiKey: string | null;
-  bearerToken: string | null;
+  apiKey: string;
 
   baseURL: string;
   maxRetries: number;
@@ -147,8 +141,7 @@ export class Tpc {
   /**
    * API Client for interfacing with the Tpc API.
    *
-   * @param {string | null | undefined} [opts.apiKey=process.env['TPC_API_KEY'] ?? null]
-   * @param {string | null | undefined} [opts.bearerToken=process.env['TPC_BEARER_TOKEN'] ?? null]
+   * @param {string | undefined} [opts.apiKey=process.env['TPC_API_KEY'] ?? undefined]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['TPC_BASE_URL'] ?? https://app.promptingcompany.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -160,13 +153,17 @@ export class Tpc {
    */
   constructor({
     baseURL = readEnv('TPC_BASE_URL'),
-    apiKey = readEnv('TPC_API_KEY') ?? null,
-    bearerToken = readEnv('TPC_BEARER_TOKEN') ?? null,
+    apiKey = readEnv('TPC_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
+    if (apiKey === undefined) {
+      throw new Errors.TpcError(
+        "The TPC_API_KEY environment variable is missing or empty; either provide it, or instantiate the Tpc client with an apiKey option, like new Tpc({ apiKey: 'My API Key' }).",
+      );
+    }
+
     const options: ClientOptions = {
       apiKey,
-      bearerToken,
       ...opts,
       baseURL,
       environment: opts.environment ?? 'production',
@@ -196,7 +193,6 @@ export class Tpc {
     this._options = options;
 
     this.apiKey = apiKey;
-    this.bearerToken = bearerToken;
   }
 
   /**
@@ -214,7 +210,6 @@ export class Tpc {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
-      bearerToken: this.bearerToken,
       ...options,
     });
     return client;
@@ -232,23 +227,11 @@ export class Tpc {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    if (this.bearerToken && values.get('authorization')) {
-      return;
-    }
-    if (nulls.has('authorization')) {
-      return;
-    }
-
-    throw new Error(
-      'Could not resolve authentication method. Expected the bearerToken to be set. Or for the "Authorization" headers to be explicitly omitted',
-    );
+    return;
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    if (this.bearerToken == null) {
-      return undefined;
-    }
-    return buildHeaders([{ Authorization: `Bearer ${this.bearerToken}` }]);
+    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
   }
 
   /**
