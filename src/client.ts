@@ -45,12 +45,22 @@ export interface ClientOptions {
   /**
    * Defaults to process.env['TPC_ORGANIZATION_ID'].
    */
-  organizationID?: string | undefined;
+  organizationID?: string | null | undefined;
+
+  /**
+   * Defaults to process.env['TPC_ORGANIZATION_SLUG'].
+   */
+  organizationSlug?: string | null | undefined;
 
   /**
    * Defaults to process.env['TPC_PRODUCT_ID'].
    */
-  productID?: string | undefined;
+  productID?: string | null | undefined;
+
+  /**
+   * Defaults to process.env['TPC_PRODUCT_SLUG'].
+   */
+  productSlug?: string | null | undefined;
 
   /**
    * Specifies the environment to use for the API.
@@ -135,8 +145,10 @@ export interface ClientOptions {
  */
 export class ThePromptingCompany {
   apiKey: string;
-  organizationID: string;
-  productID: string;
+  organizationID: string | null;
+  organizationSlug: string | null;
+  productID: string | null;
+  productSlug: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -154,8 +166,10 @@ export class ThePromptingCompany {
    * API Client for interfacing with the The Prompting Company API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['TPC_API_KEY'] ?? undefined]
-   * @param {string | undefined} [opts.organizationID=process.env['TPC_ORGANIZATION_ID'] ?? undefined]
-   * @param {string | undefined} [opts.productID=process.env['TPC_PRODUCT_ID'] ?? undefined]
+   * @param {string | null | undefined} [opts.organizationID=process.env['TPC_ORGANIZATION_ID'] ?? null]
+   * @param {string | null | undefined} [opts.organizationSlug=process.env['TPC_ORGANIZATION_SLUG'] ?? null]
+   * @param {string | null | undefined} [opts.productID=process.env['TPC_PRODUCT_ID'] ?? null]
+   * @param {string | null | undefined} [opts.productSlug=process.env['TPC_PRODUCT_SLUG'] ?? null]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['THE_PROMPTING_COMPANY_BASE_URL'] ?? https://app.promptingcompany.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -168,8 +182,10 @@ export class ThePromptingCompany {
   constructor({
     baseURL = readEnv('THE_PROMPTING_COMPANY_BASE_URL'),
     apiKey = readEnv('TPC_API_KEY'),
-    organizationID = readEnv('TPC_ORGANIZATION_ID'),
-    productID = readEnv('TPC_PRODUCT_ID'),
+    organizationID = readEnv('TPC_ORGANIZATION_ID') ?? null,
+    organizationSlug = readEnv('TPC_ORGANIZATION_SLUG') ?? null,
+    productID = readEnv('TPC_PRODUCT_ID') ?? null,
+    productSlug = readEnv('TPC_PRODUCT_SLUG') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -177,21 +193,13 @@ export class ThePromptingCompany {
         "The TPC_API_KEY environment variable is missing or empty; either provide it, or instantiate the ThePromptingCompany client with an apiKey option, like new ThePromptingCompany({ apiKey: 'My API Key' }).",
       );
     }
-    if (organizationID === undefined) {
-      throw new Errors.ThePromptingCompanyError(
-        "The TPC_ORGANIZATION_ID environment variable is missing or empty; either provide it, or instantiate the ThePromptingCompany client with an organizationID option, like new ThePromptingCompany({ organizationID: 'My Organization ID' }).",
-      );
-    }
-    if (productID === undefined) {
-      throw new Errors.ThePromptingCompanyError(
-        "The TPC_PRODUCT_ID environment variable is missing or empty; either provide it, or instantiate the ThePromptingCompany client with an productID option, like new ThePromptingCompany({ productID: 'My Product ID' }).",
-      );
-    }
 
     const options: ClientOptions = {
       apiKey,
       organizationID,
+      organizationSlug,
       productID,
+      productSlug,
       ...opts,
       baseURL,
       environment: opts.environment ?? 'production',
@@ -222,7 +230,9 @@ export class ThePromptingCompany {
 
     this.apiKey = apiKey;
     this.organizationID = organizationID;
+    this.organizationSlug = organizationSlug;
     this.productID = productID;
+    this.productSlug = productSlug;
   }
 
   /**
@@ -241,7 +251,9 @@ export class ThePromptingCompany {
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
       organizationID: this.organizationID,
+      organizationSlug: this.organizationSlug,
       productID: this.productID,
+      productSlug: this.productSlug,
       ...options,
     });
     return client;
@@ -703,7 +715,9 @@ export class ThePromptingCompany {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
         'X-Tpc-Organization-Id': this.organizationID,
+        'X-Tpc-Organization-Slug': this.organizationSlug,
         'X-Tpc-Product-Id': this.productID,
+        'X-Tpc-Product-Slug': this.productSlug,
       },
       await this.authHeaders(options),
       this._options.defaultHeaders,
