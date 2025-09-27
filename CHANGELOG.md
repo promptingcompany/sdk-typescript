@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2025-09-27)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([a6ee6b2](https://github.com/promptingcompany/sdk-typescript/commit/a6ee6b2fe8a5f66e8f6c9116ca149ab56d18e8e0))
+
 ## 0.1.0 (2025-09-27)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.1...v0.1.0)
