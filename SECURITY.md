@@ -20,7 +20,7 @@ or products provided by Tpc, please follow the respective company's security rep
 
 ### Tpc Terms and Policies
 
-Please contact support@ctrl0.ai for any questions or concerns regarding the security of our services.
+Please contact support@promptingco.com for any questions or concerns regarding the security of our services.
 
 ---
 

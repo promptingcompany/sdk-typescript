@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'tpc/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from '@promptingcompany/tpc/internal/utils/path';
 import { inspect } from 'node:util';
 import { runInNewContext } from 'node:vm';
 

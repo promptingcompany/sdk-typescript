@@ -16,7 +16,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Pub } from './resources/pub/pub';
+import { Document, DocumentGetResponse } from './resources/document';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -32,7 +32,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
   production: 'https://app.promptingcompany.com',
-  environment_1: 'http://app.localhost:3000',
+  dev: 'http://app.localhost:3000',
 };
 type Environment = keyof typeof environments;
 
@@ -47,7 +47,7 @@ export interface ClientOptions {
    *
    * Each environment maps to a different base URL:
    * - `production` corresponds to `https://app.promptingcompany.com`
-   * - `environment_1` corresponds to `http://app.localhost:3000`
+   * - `dev` corresponds to `http://app.localhost:3000`
    */
   environment?: Environment | undefined;
 
@@ -738,13 +738,13 @@ export class Tpc {
 
   static toFile = Uploads.toFile;
 
-  pub: API.Pub = new API.Pub(this);
+  document: API.Document = new API.Document(this);
 }
 
-Tpc.Pub = Pub;
+Tpc.Document = Document;
 
 export declare namespace Tpc {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Pub as Pub };
+  export { Document as Document, type DocumentGetResponse as DocumentGetResponse };
 }

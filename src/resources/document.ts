@@ -1,37 +1,33 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../core/resource';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
-import { path } from '../../internal/utils/path';
+import { APIResource } from '../core/resource';
+import { APIPromise } from '../core/api-promise';
+import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
-export class V1 extends APIResource {
+export class Document extends APIResource {
   /**
    * Retrieves a publicly accessible agentic document by its unique identifier
    *
    * @example
    * ```ts
-   * const response =
-   *   await client.pub.v1.retrieveAgenticDocument(
-   *     '550e8400-e29b-41d4-a716-446655440000',
-   *   );
+   * const document = await client.document.get(
+   *   '550e8400-e29b-41d4-a716-446655440000',
+   * );
    * ```
    */
-  retrieveAgenticDocument(
-    id: string,
-    options?: RequestOptions,
-  ): APIPromise<V1RetrieveAgenticDocumentResponse> {
+  get(id: string, options?: RequestOptions): APIPromise<DocumentGetResponse> {
     return this._client.get(path`/api/pub/v1/md/${id}`, options);
   }
 }
 
-export interface V1RetrieveAgenticDocumentResponse {
-  data?: V1RetrieveAgenticDocumentResponse.Data;
+export interface DocumentGetResponse {
+  data?: DocumentGetResponse.Data;
 
   ok?: boolean;
 }
 
-export namespace V1RetrieveAgenticDocumentResponse {
+export namespace DocumentGetResponse {
   export interface Data {
     /**
      * Unique identifier for the agentic document
@@ -185,6 +181,6 @@ export namespace V1RetrieveAgenticDocumentResponse {
   }
 }
 
-export declare namespace V1 {
-  export { type V1RetrieveAgenticDocumentResponse as V1RetrieveAgenticDocumentResponse };
+export declare namespace Document {
+  export { type DocumentGetResponse as DocumentGetResponse };
 }
