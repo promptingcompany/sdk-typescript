@@ -298,13 +298,26 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['TPC_BASE_URL'] = ''; // empty
       const client = new Tpc({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://petstore3.swagger.io/api/v3');
+      expect(client.baseURL).toEqual('https://app.promptingcompany.com');
     });
 
     test('blank env variable', () => {
       process.env['TPC_BASE_URL'] = '  '; // blank
       const client = new Tpc({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://petstore3.swagger.io/api/v3');
+      expect(client.baseURL).toEqual('https://app.promptingcompany.com');
+    });
+
+    test('env variable with environment', () => {
+      process.env['TPC_BASE_URL'] = 'https://example.com/from_env';
+
+      expect(
+        () => new Tpc({ apiKey: 'My API Key', environment: 'production' }),
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Ambiguous URL; The \`baseURL\` option (or TPC_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
+      );
+
+      const client = new Tpc({ apiKey: 'My API Key', baseURL: null, environment: 'production' });
+      expect(client.baseURL).toEqual('https://app.promptingcompany.com');
     });
 
     test('in request options', () => {
@@ -409,14 +422,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['PETSTORE_API_KEY'] = 'My API Key';
+    process.env['TPC_API_KEY'] = 'My API Key';
     const client = new Tpc();
     expect(client.apiKey).toBe('My API Key');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['PETSTORE_API_KEY'] = 'another My API Key';
+    process.env['TPC_API_KEY'] = 'another My API Key';
     const client = new Tpc({ apiKey: 'My API Key' });
     expect(client.apiKey).toBe('My API Key');
   });

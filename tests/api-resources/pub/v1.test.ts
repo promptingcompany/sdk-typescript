@@ -7,10 +7,10 @@ const client = new Tpc({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource store', () => {
+describe('resource v1', () => {
   // Prism tests are disabled
-  test.skip('listInventory', async () => {
-    const responsePromise = client.store.listInventory();
+  test.skip('retrieveAgenticDocument', async () => {
+    const responsePromise = client.pub.v1.retrieveAgenticDocument('550e8400-e29b-41d4-a716-446655440000');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -18,6 +18,10 @@ before making any information public.
 If you encounter security issues that are not directly related to SDKs but pertain to the services
 or products provided by Tpc, please follow the respective company's security reporting guidelines.
 
+### Tpc Terms and Policies
+
+Please contact support@ctrl0.ai for any questions or concerns regarding the security of our services.
+
 ---
 
 Thank you for helping us keep the SDKs and systems they interact with secure.

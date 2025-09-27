@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Tpc REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [promptingcompany.com](https://promptingcompany.com/support). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -26,12 +26,13 @@ The full API of this library can be found in [api.md](api.md).
 import Tpc from 'tpc';
 
 const client = new Tpc({
-  apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['TPC_API_KEY'], // This is the default and can be omitted
+  environment: 'environment_1', // defaults to 'production'
 });
 
-const order = await client.store.orders.create({ petId: 1, quantity: 1, status: 'placed' });
+const response = await client.pub.v1.retrieveAgenticDocument('REPLACE_ME');
 
-console.log(order.id);
+console.log(response.data);
 ```
 
 ### Request & Response types
@@ -43,10 +44,13 @@ This library includes TypeScript definitions for all request params and response
 import Tpc from 'tpc';
 
 const client = new Tpc({
-  apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['TPC_API_KEY'], // This is the default and can be omitted
+  environment: 'environment_1', // defaults to 'production'
 });
 
-const response: Tpc.StoreListInventoryResponse = await client.store.listInventory();
+const response: Tpc.Pub.V1RetrieveAgenticDocumentResponse = await client.pub.v1.retrieveAgenticDocument(
+  'REPLACE_ME',
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -59,7 +63,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.store.listInventory().catch(async (err) => {
+const response = await client.pub.v1.retrieveAgenticDocument('REPLACE_ME').catch(async (err) => {
   if (err instanceof Tpc.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -99,7 +103,7 @@ const client = new Tpc({
 });
 
 // Or, configure per-request:
-await client.store.listInventory({
+await client.pub.v1.retrieveAgenticDocument('REPLACE_ME', {
   maxRetries: 5,
 });
 ```
@@ -116,7 +120,7 @@ const client = new Tpc({
 });
 
 // Override per-request:
-await client.store.listInventory({
+await client.pub.v1.retrieveAgenticDocument('REPLACE_ME', {
   timeout: 5 * 1000,
 });
 ```
@@ -139,13 +143,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Tpc();
 
-const response = await client.store.listInventory().asResponse();
+const response = await client.pub.v1.retrieveAgenticDocument('REPLACE_ME').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.store.listInventory().withResponse();
+const { data: response, response: raw } = await client.pub.v1
+  .retrieveAgenticDocument('REPLACE_ME')
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response);
+console.log(response.data);
 ```
 
 ### Logging
@@ -225,7 +231,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.store.orders.create({
+client.pub.v1.retrieveAgenticDocument({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
