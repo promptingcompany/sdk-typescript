@@ -7,7 +7,19 @@ import { path } from '../internal/utils/path';
 
 export class Document extends APIResource {
   /**
-   * Retrieves a publicly accessible agentic document by its unique identifier
+   * Retrieves a publicly accessible agentic document by its unique identifier.
+   *
+   * **Header Requirements:**
+   *
+   * - Either `X-Tpc-Organization-Id` OR `X-Tpc-Organization-Slug` must be provided
+   * - Either `X-Tpc-Product-Id` OR `X-Tpc-Product-Slug` must be provided
+   *
+   * Valid combinations:
+   *
+   * - (X-Tpc-Organization-Id, X-Tpc-Product-Id)
+   * - (X-Tpc-Organization-Id, X-Tpc-Product-Slug)
+   * - (X-Tpc-Organization-Slug, X-Tpc-Product-Id)
+   * - (X-Tpc-Organization-Slug, X-Tpc-Product-Slug)
    *
    * @example
    * ```ts
@@ -21,7 +33,19 @@ export class Document extends APIResource {
   }
 
   /**
-   * Retrieves a publicly accessible agentic document by its file path (slug)
+   * Retrieves a publicly accessible agentic document by its file path (slug).
+   *
+   * **Header Requirements:**
+   *
+   * - Either `X-Tpc-Organization-Id` OR `X-Tpc-Organization-Slug` must be provided
+   * - Either `X-Tpc-Product-Id` OR `X-Tpc-Product-Slug` must be provided
+   *
+   * Valid combinations:
+   *
+   * - (X-Tpc-Organization-Id, X-Tpc-Product-Id)
+   * - (X-Tpc-Organization-Id, X-Tpc-Product-Slug)
+   * - (X-Tpc-Organization-Slug, X-Tpc-Product-Id)
+   * - (X-Tpc-Organization-Slug, X-Tpc-Product-Slug)
    *
    * @example
    * ```ts

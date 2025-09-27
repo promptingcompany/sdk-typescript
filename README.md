@@ -23,8 +23,6 @@ The full API of this library can be found in [api.md](api.md).
 import ThePromptingCompany from '@promptingcompany/sdk';
 
 const client = new ThePromptingCompany({
-  organizationID: 'My Organization ID',
-  productID: 'My Product ID',
   apiKey: process.env['TPC_API_KEY'], // This is the default and can be omitted
   environment: 'dev', // defaults to 'production'
 });
@@ -43,8 +41,6 @@ This library includes TypeScript definitions for all request params and response
 import ThePromptingCompany from '@promptingcompany/sdk';
 
 const client = new ThePromptingCompany({
-  organizationID: 'My Organization ID',
-  productID: 'My Product ID',
   apiKey: process.env['TPC_API_KEY'], // This is the default and can be omitted
   environment: 'dev', // defaults to 'production'
 });
@@ -98,8 +94,6 @@ You can use the `maxRetries` option to configure or disable this:
 ```js
 // Configure the default for all requests:
 const client = new ThePromptingCompany({
-  organizationID: 'My Organization ID',
-  productID: 'My Product ID',
   maxRetries: 0, // default is 2
 });
 
@@ -117,8 +111,6 @@ Requests time out after 1 minute by default. You can configure this with a `time
 ```ts
 // Configure the default for all requests:
 const client = new ThePromptingCompany({
-  organizationID: 'My Organization ID',
-  productID: 'My Product ID',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
