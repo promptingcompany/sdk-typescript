@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.0.0-alpha.4 (2025-10-04)
+
+Full Changelog: [v0.0.0-alpha.3...v0.0.0-alpha.4](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.3...v0.0.0-alpha.4)
+
+### Chores
+
+* **internal:** remove .eslintcache ([3bffcd4](https://github.com/promptingcompany/sdk-typescript/commit/3bffcd48937c0c6d36c08a6868cbf8b9cf055652))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([d31ad7d](https://github.com/promptingcompany/sdk-typescript/commit/d31ad7d03355f3ec4e2632ddfb86b2a9ee08e48f))
+
 ## 0.0.0-alpha.3 (2025-09-27)
 
 Full Changelog: [v0.0.0-alpha.2...v0.0.0-alpha.3](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.2...v0.0.0-alpha.3)
