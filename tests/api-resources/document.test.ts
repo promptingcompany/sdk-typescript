@@ -22,7 +22,7 @@ describe('resource document', () => {
 
   // Prism tests are disabled
   test.skip('getByPath', async () => {
-    const responsePromise = client.document.getByPath('getting-started/installation');
+    const responsePromise = client.document.getByPath('getting-started');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
