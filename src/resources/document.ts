@@ -35,6 +35,13 @@ export class Document extends APIResource {
   /**
    * Retrieves a publicly accessible agentic document by its file path (slug).
    *
+   * **Path Behavior:**
+   *
+   * - Supports both empty paths and specific file paths
+   * - Only uses the first path segment for lookup
+   * - Examples: `/api/pub/v1/md/by-path/` or
+   *   `/api/pub/v1/md/by-path/getting-started`
+   *
    * **Header Requirements:**
    *
    * - Either `X-Tpc-Organization-Id` OR `X-Tpc-Organization-Slug` must be provided
@@ -50,7 +57,7 @@ export class Document extends APIResource {
    * @example
    * ```ts
    * const response = await client.document.getByPath(
-   *   'getting-started/installation',
+   *   'getting-started',
    * );
    * ```
    */
