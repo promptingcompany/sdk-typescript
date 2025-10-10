@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.0.0-alpha.5 (2025-10-10)
+
+Full Changelog: [v0.0.0-alpha.4...v0.0.0-alpha.5](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.4...v0.0.0-alpha.5)
+
+### Features
+
+* **api:** path is no longer required ([e094a54](https://github.com/promptingcompany/sdk-typescript/commit/e094a54d7e618f64a3d655ea48e21a41845bcfd8))
+
+
+### Chores
+
+* **internal:** use npm pack for build uploads ([05b2d09](https://github.com/promptingcompany/sdk-typescript/commit/05b2d0977e319f7622a529e813a11f0549218857))
+
 ## 0.0.0-alpha.4 (2025-10-04)
 
 Full Changelog: [v0.0.0-alpha.3...v0.0.0-alpha.4](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.3...v0.0.0-alpha.4)
