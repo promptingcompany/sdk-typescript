@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.0.0-alpha.6 (2025-12-06)
+
+Full Changelog: [v0.0.0-alpha.5...v0.0.0-alpha.6](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.5...v0.0.0-alpha.6)
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([ddb4625](https://github.com/promptingcompany/sdk-typescript/commit/ddb46252df2654dd1928a121dab42d7b22eee211))
+* **mcp:** return correct lines on typescript errors ([30dd34f](https://github.com/promptingcompany/sdk-typescript/commit/30dd34f8b6e1cef9ee21074a0e67b39d58c1b3ab))
+
+
+### Chores
+
+* **client:** fix logger property type ([b5e80d8](https://github.com/promptingcompany/sdk-typescript/commit/b5e80d8d6ef1660ded5d74402ac365522799e8fa))
+* **internal:** codegen related update ([3413b13](https://github.com/promptingcompany/sdk-typescript/commit/3413b130e831f1dacdaffe3c9a85d35f52312513))
+* **internal:** codegen related update ([b8ea606](https://github.com/promptingcompany/sdk-typescript/commit/b8ea6066d0357675d070d62ccce5a194530a1dab))
+* **internal:** upgrade eslint ([a2e3f62](https://github.com/promptingcompany/sdk-typescript/commit/a2e3f62c739be618b9b16432ac6042321c339ee9))
+
 ## 0.0.0-alpha.5 (2025-10-10)
 
 Full Changelog: [v0.0.0-alpha.4...v0.0.0-alpha.5](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.4...v0.0.0-alpha.5)
