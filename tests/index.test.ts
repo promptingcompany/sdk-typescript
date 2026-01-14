@@ -87,7 +87,11 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new ThePromptingCompany({ logger: logger, logLevel: 'debug', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        logLevel: 'debug',
+        apiKey: 'My API Key',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).toHaveBeenCalled();
@@ -107,7 +111,11 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new ThePromptingCompany({ logger: logger, logLevel: 'info', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        logLevel: 'info',
+        apiKey: 'My API Key',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -157,7 +165,11 @@ describe('instantiate client', () => {
       };
 
       process.env['THE_PROMPTING_COMPANY_LOG'] = 'debug';
-      const client = new ThePromptingCompany({ logger: logger, logLevel: 'off', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        logLevel: 'off',
+        apiKey: 'My API Key',
+      });
 
       await forceAPIResponseForClient(client);
       expect(debugMock).not.toHaveBeenCalled();
@@ -173,7 +185,11 @@ describe('instantiate client', () => {
       };
 
       process.env['THE_PROMPTING_COMPANY_LOG'] = 'not a log level';
-      const client = new ThePromptingCompany({ logger: logger, logLevel: 'debug', apiKey: 'My API Key' });
+      const client = new ThePromptingCompany({
+        logger: logger,
+        logLevel: 'debug',
+        apiKey: 'My API Key',
+      });
       expect(client.logLevel).toBe('debug');
       expect(warnMock).not.toHaveBeenCalled();
     });
@@ -569,7 +585,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', timeout: 10, fetch: testFetch });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      timeout: 10,
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -599,7 +619,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
 
@@ -623,7 +647,11 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -685,7 +713,11 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new ThePromptingCompany({ apiKey: 'My API Key', fetch: testFetch, maxRetries: 4 });
+    const client = new ThePromptingCompany({
+      apiKey: 'My API Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
