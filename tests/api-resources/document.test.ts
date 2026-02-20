@@ -8,7 +8,7 @@ const client = new ThePromptingCompany({
 });
 
 describe('resource document', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.document.get('550e8400-e29b-41d4-a716-446655440000');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource document', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getByPath', async () => {
     const responsePromise = client.document.getByPath('getting-started');
     const rawResponse = await responsePromise.asResponse();
