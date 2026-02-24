@@ -60,7 +60,7 @@ $ yarn link @promptingcompany/sdk
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @promptingcompany/sdk
+$ pnpm link --global @promptingcompany/sdk
 ```
 
 ## Running tests
