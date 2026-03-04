@@ -5,6 +5,9 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Publicly accessible endpoints
+ */
 export class Document extends APIResource {
   /**
    * Retrieves a publicly accessible agentic document by its unique identifier.

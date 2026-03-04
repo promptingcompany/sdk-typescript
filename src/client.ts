@@ -789,6 +789,9 @@ export class ThePromptingCompany {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * Publicly accessible endpoints
+   */
   document: API.Document = new API.Document(this);
 }
 
