@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0 (2026-05-15)
+
+Full Changelog: [v0.0.0-alpha.12...v0.1.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.12...v0.1.0)
+
+### Features
+
+* **document:** improve JSDoc for list() method ([1c59212](https://github.com/promptingcompany/sdk-typescript/commit/1c59212d7a32966659cd7d79c891282fc1f98f69))
+
+
+### Chores
+
+* **stainless:** document list endpoint and clarify api_key description ([e49825a](https://github.com/promptingcompany/sdk-typescript/commit/e49825a85e2df0cd6b06884b8613aa5fbe9431a8))
+* **stainless:** format stainless.yml with prettier ([fe025f2](https://github.com/promptingcompany/sdk-typescript/commit/fe025f2eba9944033d1870b1a0de8a8b9e6fc994))
+* trigger Release Please for first stable release ([3fa5d68](https://github.com/promptingcompany/sdk-typescript/commit/3fa5d682bc958127910bc467eb7714294113808b))
+
 ## 0.0.0-alpha.12 (2026-05-15)
 
 Full Changelog: [v0.0.0-alpha.11...v0.0.0-alpha.12](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.11...v0.0.0-alpha.12)
