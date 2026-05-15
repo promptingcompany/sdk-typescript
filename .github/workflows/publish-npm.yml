@@ -2,34 +2,40 @@
 # It can also be run manually to re-publish to NPM in case it failed for some reason.
 # You can run this workflow by navigating to https://www.github.com/promptingcompany/sdk-typescript/actions/workflows/publish-npm.yml
 name: Publish NPM
-on:
-  workflow_dispatch:
 
+on:
   release:
     types: [published]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   publish:
-    name: publish
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Set up Node
+      - name: Setup Node.js
         uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
         with:
-          node-version: '20'
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Set up pnpm
+      - name: Setup pnpm
         uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
 
       - name: Install dependencies
-        run: |
-          pnpm install
+        run: pnpm install
 
-      - name: Publish to NPM
+      - name: Build
+        run: pnpm build
+
+      - name: Publish to npm (with provenance)
         run: |
-          bash ./bin/publish-npm
+          cd dist
+          pnpm publish --provenance --access public --no-git-checks
         env:
-          NPM_TOKEN: ${{ secrets.THE_PROMPTING_COMPANY_NPM_TOKEN || secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.THE_PROMPTING_COMPANY_NPM_TOKEN || secrets.NPM_TOKEN }}
