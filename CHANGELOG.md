@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.0-alpha.9 (2026-05-15)
+
+Full Changelog: [v0.0.0-alpha.8...v0.0.0-alpha.9](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.8...v0.0.0-alpha.9)
+
+### Chores
+
+* **stainless:** run prettier on config files ([ede7f5e](https://github.com/promptingcompany/sdk-typescript/commit/ede7f5ebfb9c35d76c78959a4352962293e42156))
+
 ## 0.0.0-alpha.8 (2026-05-15)
 
 Full Changelog: [v0.0.0-alpha.7...v0.0.0-alpha.8](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.7...v0.0.0-alpha.8)
