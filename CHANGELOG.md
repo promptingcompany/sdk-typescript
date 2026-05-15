@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (2026-05-15)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* **api:** api update ([f44be18](https://github.com/promptingcompany/sdk-typescript/commit/f44be189c85c2a68232fa01754fc6d4fbdb0ca83))
+* **api:** api update ([cd21900](https://github.com/promptingcompany/sdk-typescript/commit/cd219000b36a2ed73018501551c8151188c72908))
+
 ## 0.1.1 (2026-05-15)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/promptingcompany/sdk-typescript/compare/v0.1.0...v0.1.1)
