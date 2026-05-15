@@ -1,0 +1,125 @@
+# yaml-language-server: $schema=https://app.stainless.com/config.schema.json
+
+organization:
+  # Name of your organization or company, used to determine the name of the client
+  # and headings.
+  name: "The Prompting Company"
+  # Link to your API documentation.
+  docs: https://promptingcompany.com/support
+  # Contact email for bug reports, questions, and support requests.
+  contact: support@promptingco.com
+
+# `targets` define the output targets and their customization options, such as
+# whether to emit the Node SDK and what it's package name should be.
+targets:
+  typescript:
+    package_name: "@promptingcompany/sdk"
+    production_repo: promptingcompany/sdk-typescript
+    edition: typescript.2025-10-10
+    publish:
+      npm: true
+
+# `environments` are a map of the name of the environment (e.g. "sandbox",
+# "production") to the corresponding url to use.
+environments:
+  production: https://app.promptingco.com
+  dev: http://app.localhost:3000
+
+# `resources` define the structure and organization for your API, such as how
+# methods and models are grouped together and accessed. See the [configuration
+# guide] for more information.
+#
+# [configuration guide]: https://www.stainless.com/docs/guides/configure#resources
+resources:
+  document:
+    methods:
+      get: get /api/v1/md/{id}
+      get_by_path: get /api/v1/md/by-path/{path}
+
+settings:
+  # All generated integration tests that hit the prism mock http server are marked
+  # as skipped. Removing this setting or setting it to false enables tests, but
+  # doing so may result in test failures due to bugs in the test server.
+  #
+  # [prism mock http server]: https://stoplight.io/open-source/prism
+  disable_mock_tests: true
+  license: Apache-2.0
+
+# `client_settings` define settings for the API client, such as extra constructor
+# arguments (used for authentication), retry behavior, idempotency, etc.
+client_settings:
+  opts:
+    api_key:
+      type: string
+      nullable: false
+      description: Bearer token (tpc_...) sent as Authorization header for public document access
+      read_env: TPC_API_KEY
+      send_in_header: Authorization
+    organization_id:
+      type: string # can be a string, boolean, or a number
+      nullable: true
+      read_env: TPC_ORGANIZATION_ID
+      send_in_header: 'X-Tpc-Organization-Id'
+    organization_slug:
+      type: string
+      nullable: true
+      read_env: TPC_ORGANIZATION_SLUG
+      send_in_header: 'X-Tpc-Organization-Slug'
+    product_id:
+      type: string
+      nullable: true
+      read_env: TPC_PRODUCT_ID
+      send_in_header: 'X-Tpc-Product-Id'
+    product_slug:
+      type: string
+      nullable: true
+      read_env: TPC_PRODUCT_SLUG
+      send_in_header: 'X-Tpc-Product-Slug'
+
+    # Internal / authenticated API keys (wired to OpenAPI securitySchemes to silence lint warnings)
+    organization_api_key:
+      type: string
+      nullable: true
+      auth:
+        security_scheme: apiKeyAuth
+      description: Organization-scoped API key sent as x-api-key header
+      read_env: TPC_ORGANIZATION_API_KEY
+      send_in_header: X-Api-Key
+
+    bearer_token:
+      type: string
+      nullable: true
+      auth:
+        security_scheme: bearerAuth
+      description: Bearer session or OAuth access token (JWT)
+      read_env: TPC_BEARER_TOKEN
+
+    session_token:
+      type: string
+      nullable: true
+      auth:
+        security_scheme: cookieAuth
+      description: First-party browser session cookie
+      read_env: TPC_SESSION_TOKEN
+      send_in_cookie: better-auth.session_token
+
+# security:
+#   - BearerAuth: []
+# The public document endpoints use security: [] in the OpenAPI spec.
+# The token is passed as a plain 'authorization' header parameter instead.
+
+# `readme` is used to configure the code snippets that will be rendered in the
+# README.md of various SDKs. In particular, you can change the `headline`
+# snippet's endpoint and the arguments to call it with.
+readme:
+  example_requests:
+    default:
+      type: request
+      endpoint: get /api/v1/md/{id}
+      params:
+        id: REPLACE_ME
+    headline:
+      type: request
+      endpoint: get /api/v1/md/by-path/{path}
+      params:
+        path: REPLACE_ME

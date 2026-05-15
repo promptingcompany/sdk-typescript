@@ -1,0 +1,13 @@
+{
+  "project": "tpc",
+  "openapi_spec": "openapi.json",
+  "stainless_config": "stainless.yml",
+  "targets": {
+    "openapi": {
+      "output_path": "../sdks/tpc-openapi"
+    },
+    "typescript": {
+      "output_path": "../sdks/tpc-typescript"
+    }
+  }
+}
