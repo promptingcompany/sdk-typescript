@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.0-alpha.11 (2026-05-15)
+
+Full Changelog: [v0.0.0-alpha.10...v0.0.0-alpha.11](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.10...v0.0.0-alpha.11)
+
 ## 0.0.0-alpha.10 (2026-05-15)
 
 Full Changelog: [v0.0.0-alpha.9...v0.0.0-alpha.10](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.9...v0.0.0-alpha.10)
