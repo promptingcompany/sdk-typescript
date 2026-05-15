@@ -35,6 +35,7 @@ resources:
     methods:
       get: get /api/v1/md/{id}
       get_by_path: get /api/v1/md/by-path/{path}
+      list: get /api/v1/site/pages
 
 settings:
   # All generated integration tests that hit the prism mock http server are marked
