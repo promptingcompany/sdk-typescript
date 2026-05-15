@@ -37,5 +37,10 @@ jobs:
       - name: Publish to npm (with provenance)
         run: |
           cd dist
+          VERSION=$(node -p 'require("./package.json").version')
+          if npm view "@promptingcompany/sdk@${VERSION}" version >/dev/null 2>&1; then
+            echo "Version ${VERSION} is already published on npm — skipping (workflow is safe to re-run)."
+            exit 0
+          fi
           tag=$(node -p 'const version = require("./package.json").version; const match = version.match(/-([0-9A-Za-z]+)(?:[.-]|$)/); match ? match[1] : "latest"')
           npm publish --provenance --access public --tag "$tag"
