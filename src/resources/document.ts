@@ -7,6 +7,13 @@ import { path } from '../internal/utils/path';
 
 export class Document extends APIResource {
   /**
+   * List site pages
+   */
+  list(query: DocumentListParams, options?: RequestOptions): APIPromise<DocumentListResponse> {
+    return this._client.get('/api/v1/site/pages', { query, ...options });
+  }
+
+  /**
    * Get public markdown content by ID
    */
   get(id: string, options?: RequestOptions): APIPromise<DocumentGetResponse> {
@@ -18,6 +25,116 @@ export class Document extends APIResource {
    */
   getByPath(path_: string, options?: RequestOptions): APIPromise<DocumentGetByPathResponse> {
     return this._client.get(path`/api/v1/md/by-path/${path_}`, options);
+  }
+}
+
+export interface DocumentListResponse {
+  data: DocumentListResponse.Data;
+
+  ok: true;
+}
+
+export namespace DocumentListResponse {
+  export interface Data {
+    archivedStatus: 'active' | 'archived' | 'all';
+
+    domain: string | null;
+
+    domainId: string | null;
+
+    hasContent: boolean | null;
+
+    isManual: boolean | null;
+
+    items: Array<Data.Item>;
+
+    orderBy: 'createdAt' | 'updatedAt' | 'deletedAt';
+
+    orderByDirection: 'asc' | 'desc';
+
+    page: number;
+
+    pageSize: number;
+
+    pathPrefix: string | null;
+
+    query: string | null;
+
+    scope: Data.Scope;
+
+    status: string | null;
+
+    total: number;
+
+    totalPages: number;
+
+    type: string | null;
+  }
+
+  export namespace Data {
+    export interface Item {
+      id: string;
+
+      createdAt: string;
+
+      deletedAt: string | null;
+
+      domains: Array<Item.Domain>;
+
+      filePath: string;
+
+      isManual: boolean;
+
+      metaDescription: string | null;
+
+      metaTitle: string | null;
+
+      publishedAt: string | null;
+
+      sourceUrl: string;
+
+      status: string;
+
+      title: string;
+
+      type: string;
+
+      updatedAt: string;
+    }
+
+    export namespace Item {
+      export interface Domain {
+        id: string;
+
+        domain: string;
+
+        isCanonical: boolean;
+      }
+    }
+
+    export interface Scope {
+      organization: Scope.Organization;
+
+      product: Scope.Product;
+    }
+
+    export namespace Scope {
+      export interface Organization {
+        id: string;
+
+        name: string;
+
+        slug: string;
+      }
+
+      export interface Product {
+        id: string;
+
+        name: string;
+
+        slug: string | null;
+      }
+    }
   }
 }
 
@@ -85,9 +202,43 @@ export namespace DocumentGetByPathResponse {
   }
 }
 
+export interface DocumentListParams {
+  productId: string;
+
+  archivedStatus?: 'active' | 'archived' | 'all';
+
+  domain?: string;
+
+  domainId?: string;
+
+  hasContent?: boolean;
+
+  isManual?: boolean;
+
+  orderBy?: 'createdAt' | 'updatedAt' | 'deletedAt';
+
+  orderByDirection?: 'asc' | 'desc';
+
+  page?: number;
+
+  pageSize?: number;
+
+  pathPrefix?: string;
+
+  q?: string;
+
+  query?: string;
+
+  status?: 'draft' | 'published';
+
+  type?: string;
+}
+
 export declare namespace Document {
   export {
+    type DocumentListResponse as DocumentListResponse,
     type DocumentGetResponse as DocumentGetResponse,
     type DocumentGetByPathResponse as DocumentGetByPathResponse,
+    type DocumentListParams as DocumentListParams,
   };
 }
