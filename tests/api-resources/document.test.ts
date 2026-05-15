@@ -4,13 +4,14 @@ import ThePromptingCompany from '@promptingcompany/sdk';
 
 const client = new ThePromptingCompany({
   apiKey: 'My API Key',
+  organizationAPIKey: 'My Organization API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource document', () => {
   // Mock server tests are disabled
   test.skip('get', async () => {
-    const responsePromise = client.document.get('550e8400-e29b-41d4-a716-446655440000');
+    const responsePromise = client.document.get('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +23,7 @@ describe('resource document', () => {
 
   // Mock server tests are disabled
   test.skip('getByPath', async () => {
-    const responsePromise = client.document.getByPath('getting-started');
+    const responsePromise = client.document.getByPath('x');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
