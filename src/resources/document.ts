@@ -7,10 +7,7 @@ import { path } from '../internal/utils/path';
 
 export class Document extends APIResource {
   /**
-   * List site pages for a product.
-   *
-   * The `productId` parameter is required. Supports pagination, filtering by path,
-   * status, and other fields.
+   * List site pages
    */
   list(query: DocumentListParams, options?: RequestOptions): APIPromise<DocumentListResponse> {
     return this._client.get('/api/v1/site/pages', { query, ...options });
