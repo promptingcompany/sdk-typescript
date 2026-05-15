@@ -26,5 +26,10 @@ else
   TAG="latest"
 fi
 
+if npm view "@promptingcompany/sdk@${VERSION}" version >/dev/null 2>&1; then
+  echo "==> Version ${VERSION} is already published on npm — skipping."
+  exit 0
+fi
+
 echo "==> Publishing @promptingcompany/sdk@$VERSION with tag '$TAG'..."
 pnpm publish --no-git-checks --tag "$TAG"
