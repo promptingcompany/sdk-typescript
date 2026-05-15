@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.0.0-alpha.8 (2026-05-15)
+
+Full Changelog: [v0.0.0-alpha.7...v0.0.0-alpha.8](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.7...v0.0.0-alpha.8)
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([3d9cea4](https://github.com/promptingcompany/sdk-typescript/commit/3d9cea48dbb5438db201b429f223f7ec1a05cf4c))
+* **client:** avoid removing abort listener too early ([1996519](https://github.com/promptingcompany/sdk-typescript/commit/199651942e9738db070b7f4a14ecc9e239903b6b))
+* **client:** preserve URL params already embedded in path ([4611498](https://github.com/promptingcompany/sdk-typescript/commit/4611498414377fd51e53e434735c6b801d824ac4))
+* **docs/contributing:** correct pnpm link command ([a45a88b](https://github.com/promptingcompany/sdk-typescript/commit/a45a88b0f4cba3d9fb1586e9809d25a49f115fb1))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([ce3e5f8](https://github.com/promptingcompany/sdk-typescript/commit/ce3e5f8ac8d68eeb81d827e34f25a9d5c6c211fe))
+* **ci:** upgrade `actions/github-script` ([1d0cd2f](https://github.com/promptingcompany/sdk-typescript/commit/1d0cd2f969670467e25e0ea45be41996c15fe6df))
+* **client:** do not parse responses with empty content-length ([91be8f4](https://github.com/promptingcompany/sdk-typescript/commit/91be8f47d64e252fc3ee5cd3c6902e6884b9d8b8))
+* **client:** restructure abort controller binding ([9fe8bcb](https://github.com/promptingcompany/sdk-typescript/commit/9fe8bcbb3d051cf66bdd55a2d2c2a51239e5e932))
+* **examples:** remove nextjs sample app ([b07e65b](https://github.com/promptingcompany/sdk-typescript/commit/b07e65bddeb5732e0557c2002553b6ac0ea038f0))
+* **internal/client:** fix form-urlencoded requests ([27bffad](https://github.com/promptingcompany/sdk-typescript/commit/27bffad516f5ec3e97dc21b4d2e2e05695268d58))
+* **internal:** avoid type checking errors with ts-reset ([7f7aed9](https://github.com/promptingcompany/sdk-typescript/commit/7f7aed9073dca82fe75f4ef429e8ea2b565aabc3))
+* **internal:** codegen related update ([8422908](https://github.com/promptingcompany/sdk-typescript/commit/84229088253d2c72d961aef286e1ad3ad9293e54))
+* **internal:** codegen related update ([9055e1d](https://github.com/promptingcompany/sdk-typescript/commit/9055e1d1c0253b309f9da1e0e50ba4e6c356183c))
+* **internal:** codegen related update ([ad6af5c](https://github.com/promptingcompany/sdk-typescript/commit/ad6af5c517b1cc97e98a28168f01d45b9709f277))
+* **internal:** move stringifyQuery implementation to internal function ([f02e3ef](https://github.com/promptingcompany/sdk-typescript/commit/f02e3ef61873fd5807ade40bd27b39b941c6d919))
+* **internal:** remove mock server code ([fcb2e2a](https://github.com/promptingcompany/sdk-typescript/commit/fcb2e2a3a15340278bde4209bfbb8f63e7f2dc33))
+* **internal:** update `actions/checkout` version ([938e10b](https://github.com/promptingcompany/sdk-typescript/commit/938e10b9c700bb4a74afdce00027b1b003e3bdb1))
+* **internal:** update dependencies to address dependabot vulnerabilities ([6a7e47f](https://github.com/promptingcompany/sdk-typescript/commit/6a7e47f07cb3f7e41f5529ba1e8d3caae08d3075))
+* **internal:** update lock file ([b33c2a1](https://github.com/promptingcompany/sdk-typescript/commit/b33c2a13b3b67bace65fe6e2cc7de937236ad213))
+* **internal:** upgrade babel, qs, js-yaml ([98f933b](https://github.com/promptingcompany/sdk-typescript/commit/98f933b901bfd3a778b8435cbea694a6621e5f2c))
+* **internal:** upgrade brace-expansion and @babel/helpers ([e2fed27](https://github.com/promptingcompany/sdk-typescript/commit/e2fed27de944f3bdc13489265acd4ebcdf373fc2))
+* **internal:** upgrade pnpm ([669fcf9](https://github.com/promptingcompany/sdk-typescript/commit/669fcf994ac0f1ad575ba83448713ea6606cca01))
+* **internal:** upgrade pnpm version ([1044e8b](https://github.com/promptingcompany/sdk-typescript/commit/1044e8b5308b6792e7c4b7d6b840739a54d11756))
+* **stainless:** fix config paths and security schemes ([83c78b0](https://github.com/promptingcompany/sdk-typescript/commit/83c78b05d23d2c37c3ce52faac95cdcc0293b267))
+* update mock server docs ([8c60f74](https://github.com/promptingcompany/sdk-typescript/commit/8c60f74c3bcaac923299dfd3d3310c9010be456b))
+
 ## 0.0.0-alpha.7 (2026-01-14)
 
 Full Changelog: [v0.0.0-alpha.6...v0.0.0-alpha.7](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.6...v0.0.0-alpha.7)
