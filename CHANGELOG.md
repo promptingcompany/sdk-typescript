@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2026-05-15)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/promptingcompany/sdk-typescript/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* **stainless:** improve descriptions for client authentication options ([0a28955](https://github.com/promptingcompany/sdk-typescript/commit/0a28955ed6571160be8c54c35b356a3b492a9637))
+
 ## 0.1.0 (2026-05-15)
 
 Full Changelog: [v0.0.0-alpha.12...v0.1.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.12...v0.1.0)
