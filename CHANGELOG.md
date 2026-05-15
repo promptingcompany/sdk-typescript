@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.0.0-alpha.10 (2026-05-15)
+
+Full Changelog: [v0.0.0-alpha.9...v0.0.0-alpha.10](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.9...v0.0.0-alpha.10)
+
+### Chores
+
+* **ci:** migrate publish workflow to npm OIDC Trusted Publishing + provenance ([3e181c8](https://github.com/promptingcompany/sdk-typescript/commit/3e181c8033cffac4f3b4534fd8b52626813f4d63))
+* **ci:** remove outdated Release Doctor check ([1ad221e](https://github.com/promptingcompany/sdk-typescript/commit/1ad221e9c18dc3dd4a20eccaa1abadd100e7f999))
+* **ci:** simplify bin/publish-npm for OIDC era ([9659e3c](https://github.com/promptingcompany/sdk-typescript/commit/9659e3c8cc05a850b8eea8f21ca23610298ded6d))
+* **ci:** use human-readable action versions in publish workflow ([37db304](https://github.com/promptingcompany/sdk-typescript/commit/37db3041227d9c2fd0f03e2a19fbc5bb9b78b98c))
+
 ## 0.0.0-alpha.9 (2026-05-15)
 
 Full Changelog: [v0.0.0-alpha.8...v0.0.0-alpha.9](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.8...v0.0.0-alpha.9)
