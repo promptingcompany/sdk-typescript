@@ -10,8 +10,8 @@ const client = new ThePromptingCompany({
 
 describe('resource document', () => {
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.document.list({ productId: 'x' });
+  test.skip('list', async () => {
+    const responsePromise = client.document.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,24 +22,31 @@ describe('resource document', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.document.list({
-      productId: 'x',
-      archivedStatus: 'active',
-      domain: 'domain',
-      domainId: 'domainId',
-      hasContent: true,
-      isManual: true,
-      orderBy: 'createdAt',
-      orderByDirection: 'asc',
-      page: 0,
-      pageSize: 0,
-      pathPrefix: 'pathPrefix',
-      q: 'q',
-      query: 'query',
-      status: 'draft',
-      type: 'type',
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.document.list(
+        {
+          archivedStatus: 'active',
+          domain: 'domain',
+          domainId: 'domainId',
+          hasContent: true,
+          isManual: true,
+          orderBy: 'createdAt',
+          orderByDirection: 'asc',
+          page: 0,
+          pageSize: 0,
+          pathPrefix: 'pathPrefix',
+          productId: 'x',
+          productSlug: 'x',
+          q: 'q',
+          query: 'query',
+          status: 'draft',
+          type: 'type',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(ThePromptingCompany.NotFoundError);
   });
 
   // Mock server tests are disabled
