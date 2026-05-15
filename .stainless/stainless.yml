@@ -57,23 +57,27 @@ client_settings:
       read_env: TPC_API_KEY
       send_in_header: Authorization
     organization_id:
-      type: string # can be a string, boolean, or a number
+      type: string
       nullable: true
+      description: Organization ID sent as X-Tpc-Organization-Id header
       read_env: TPC_ORGANIZATION_ID
       send_in_header: 'X-Tpc-Organization-Id'
     organization_slug:
       type: string
       nullable: true
+      description: Organization slug sent as X-Tpc-Organization-Slug header
       read_env: TPC_ORGANIZATION_SLUG
       send_in_header: 'X-Tpc-Organization-Slug'
     product_id:
       type: string
       nullable: true
+      description: Product ID sent as X-Tpc-Product-Id header
       read_env: TPC_PRODUCT_ID
       send_in_header: 'X-Tpc-Product-Id'
     product_slug:
       type: string
       nullable: true
+      description: Product slug sent as X-Tpc-Product-Slug header
       read_env: TPC_PRODUCT_SLUG
       send_in_header: 'X-Tpc-Product-Slug'
 
@@ -83,7 +87,7 @@ client_settings:
       nullable: true
       auth:
         security_scheme: apiKeyAuth
-      description: Organization-scoped API key sent as x-api-key header
+      description: Organization-scoped API key (x-api-key header) for authenticated internal API access
       read_env: TPC_ORGANIZATION_API_KEY
       send_in_header: X-Api-Key
 
@@ -92,7 +96,7 @@ client_settings:
       nullable: true
       auth:
         security_scheme: bearerAuth
-      description: Bearer session or OAuth access token (JWT)
+      description: Bearer session or OAuth access token (JWT) for authenticated requests
       read_env: TPC_BEARER_TOKEN
 
     session_token:
