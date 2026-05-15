@@ -3,7 +3,7 @@
 organization:
   # Name of your organization or company, used to determine the name of the client
   # and headings.
-  name: "The Prompting Company"
+  name: 'The Prompting Company'
   # Link to your API documentation.
   docs: https://promptingcompany.com/support
   # Contact email for bug reports, questions, and support requests.
@@ -13,7 +13,7 @@ organization:
 # whether to emit the Node SDK and what it's package name should be.
 targets:
   typescript:
-    package_name: "@promptingcompany/sdk"
+    package_name: '@promptingcompany/sdk'
     production_repo: promptingcompany/sdk-typescript
     edition: typescript.2025-10-10
     publish:
