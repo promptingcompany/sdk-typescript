@@ -39,7 +39,7 @@ type Environment = keyof typeof environments;
 
 export interface ClientOptions {
   /**
-   * API key authentication using Bearer token in Authorization header
+   * Bearer token (tpc_...) sent as Authorization header for public document access
    */
   apiKey?: string | undefined;
 
@@ -62,6 +62,21 @@ export interface ClientOptions {
    * Defaults to process.env['TPC_PRODUCT_SLUG'].
    */
   productSlug?: string | null | undefined;
+
+  /**
+   * Organization-scoped API key sent as x-api-key header
+   */
+  organizationAPIKey?: string | null | undefined;
+
+  /**
+   * Bearer session or OAuth access token (JWT)
+   */
+  bearerToken?: string | null | undefined;
+
+  /**
+   * First-party browser session cookie
+   */
+  sessionToken?: string | null | undefined;
 
   /**
    * Specifies the environment to use for the API.
@@ -150,6 +165,9 @@ export class ThePromptingCompany {
   organizationSlug: string | null;
   productID: string | null;
   productSlug: string | null;
+  organizationAPIKey: string | null;
+  bearerToken: string | null;
+  sessionToken: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -171,6 +189,9 @@ export class ThePromptingCompany {
    * @param {string | null | undefined} [opts.organizationSlug=process.env['TPC_ORGANIZATION_SLUG'] ?? null]
    * @param {string | null | undefined} [opts.productID=process.env['TPC_PRODUCT_ID'] ?? null]
    * @param {string | null | undefined} [opts.productSlug=process.env['TPC_PRODUCT_SLUG'] ?? null]
+   * @param {string | null | undefined} [opts.organizationAPIKey=process.env['TPC_ORGANIZATION_API_KEY'] ?? null]
+   * @param {string | null | undefined} [opts.bearerToken=process.env['TPC_BEARER_TOKEN'] ?? null]
+   * @param {string | null | undefined} [opts.sessionToken=process.env['TPC_SESSION_TOKEN'] ?? null]
    * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['THE_PROMPTING_COMPANY_BASE_URL'] ?? https://app.promptingco.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
@@ -187,6 +208,9 @@ export class ThePromptingCompany {
     organizationSlug = readEnv('TPC_ORGANIZATION_SLUG') ?? null,
     productID = readEnv('TPC_PRODUCT_ID') ?? null,
     productSlug = readEnv('TPC_PRODUCT_SLUG') ?? null,
+    organizationAPIKey = readEnv('TPC_ORGANIZATION_API_KEY') ?? null,
+    bearerToken = readEnv('TPC_BEARER_TOKEN') ?? null,
+    sessionToken = readEnv('TPC_SESSION_TOKEN') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -201,6 +225,9 @@ export class ThePromptingCompany {
       organizationSlug,
       productID,
       productSlug,
+      organizationAPIKey,
+      bearerToken,
+      sessionToken,
       ...opts,
       baseURL,
       environment: opts.environment ?? 'production',
@@ -227,6 +254,18 @@ export class ThePromptingCompany {
     this.fetch = options.fetch ?? Shims.getDefaultFetch();
     this.#encoder = Opts.FallbackEncoder;
 
+    const customHeadersEnv = readEnv('THE_PROMPTING_COMPANY_CUSTOM_HEADERS');
+    if (customHeadersEnv) {
+      const parsed: Record<string, string> = {};
+      for (const line of customHeadersEnv.split('\n')) {
+        const colon = line.indexOf(':');
+        if (colon >= 0) {
+          parsed[line.substring(0, colon).trim()] = line.substring(colon + 1).trim();
+        }
+      }
+      options.defaultHeaders = { ...parsed, ...options.defaultHeaders };
+    }
+
     this._options = options;
 
     this.apiKey = apiKey;
@@ -234,6 +273,9 @@ export class ThePromptingCompany {
     this.organizationSlug = organizationSlug;
     this.productID = productID;
     this.productSlug = productSlug;
+    this.organizationAPIKey = organizationAPIKey;
+    this.bearerToken = bearerToken;
+    this.sessionToken = sessionToken;
   }
 
   /**
@@ -255,6 +297,9 @@ export class ThePromptingCompany {
       organizationSlug: this.organizationSlug,
       productID: this.productID,
       productSlug: this.productSlug,
+      organizationAPIKey: this.organizationAPIKey,
+      bearerToken: this.bearerToken,
+      sessionToken: this.sessionToken,
       ...options,
     });
     return client;
@@ -272,11 +317,59 @@ export class ThePromptingCompany {
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
-    return;
+    if (this.organizationAPIKey && values.get('x-api-key')) {
+      return;
+    }
+    if (nulls.has('x-api-key')) {
+      return;
+    }
+
+    if (this.bearerToken && values.get('authorization')) {
+      return;
+    }
+    if (nulls.has('authorization')) {
+      return;
+    }
+
+    if (this.sessionToken && values.get('better-auth.session_token')) {
+      return;
+    }
+    if (nulls.has('better-auth.session_token')) {
+      return;
+    }
+
+    throw new Error(
+      'Could not resolve authentication method. Expected one of organizationAPIKey, bearerToken or sessionToken to be set. Or for one of the "x-api-key", "Authorization" or "better-auth.session_token" headers to be explicitly omitted',
+    );
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
+    return buildHeaders([
+      await this.apiKeyAuth(opts),
+      await this.bearerAuth(opts),
+      await this.cookieAuth(opts),
+    ]);
+  }
+
+  protected async apiKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.organizationAPIKey == null) {
+      return undefined;
+    }
+    return buildHeaders([{ 'x-api-key': this.organizationAPIKey }]);
+  }
+
+  protected async bearerAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.bearerToken == null) {
+      return undefined;
+    }
+    return buildHeaders([{ Authorization: `Bearer ${this.bearerToken}` }]);
+  }
+
+  protected async cookieAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    if (this.sessionToken == null) {
+      return undefined;
+    }
+    return buildHeaders([{ 'better-auth.session_token': this.sessionToken }]);
   }
 
   /**
@@ -704,10 +797,12 @@ export class ThePromptingCompany {
         'X-Stainless-Retry-Count': String(retryCount),
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
+        Authorization: this.apiKey,
         'X-Tpc-Organization-Id': this.organizationID,
         'X-Tpc-Organization-Slug': this.organizationSlug,
         'X-Tpc-Product-Id': this.productID,
         'X-Tpc-Product-Slug': this.productSlug,
+        'X-Api-Key': this.organizationAPIKey,
       },
       await this.authHeaders(options),
       this._options.defaultHeaders,
@@ -790,9 +885,6 @@ export class ThePromptingCompany {
 
   static toFile = Uploads.toFile;
 
-  /**
-   * Publicly accessible endpoints
-   */
   document: API.Document = new API.Document(this);
 }
 
