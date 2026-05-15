@@ -7,9 +7,13 @@ import { path } from '../internal/utils/path';
 
 export class Document extends APIResource {
   /**
-   * List site pages
+   * List pages for a product. You must provide exactly one of `productId` or
+   * `productSlug` as a query parameter to identify the target product.
    */
-  list(query: DocumentListParams, options?: RequestOptions): APIPromise<DocumentListResponse> {
+  list(
+    query: DocumentListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DocumentListResponse> {
     return this._client.get('/api/v1/site/pages', { query, ...options });
   }
 
@@ -203,8 +207,6 @@ export namespace DocumentGetByPathResponse {
 }
 
 export interface DocumentListParams {
-  productId: string;
-
   archivedStatus?: 'active' | 'archived' | 'all';
 
   domain?: string;
@@ -224,6 +226,18 @@ export interface DocumentListParams {
   pageSize?: number;
 
   pathPrefix?: string;
+
+  /**
+   * Product ID. At least one of productId or productSlug is required when listing
+   * pages.
+   */
+  productId?: string;
+
+  /**
+   * Product slug. At least one of productId or productSlug is required when listing
+   * pages.
+   */
+  productSlug?: string;
 
   q?: string;
 
