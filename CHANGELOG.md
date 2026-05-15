@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.0-alpha.12 (2026-05-15)
+
+Full Changelog: [v0.0.0-alpha.11...v0.0.0-alpha.12](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.11...v0.0.0-alpha.12)
+
+### Features
+
+* **api:** api update ([d908f7e](https://github.com/promptingcompany/sdk-typescript/commit/d908f7e92f4588c14849c9d7f7239a7468a0b555))
+* **document:** add list() method for site pages ([b77f0af](https://github.com/promptingcompany/sdk-typescript/commit/b77f0afe19595fc4a0a3d0fbb931ba73b092c781))
+
+
+### Chores
+
+* **release:** enable stable v0.1.0 releases ([5790ddf](https://github.com/promptingcompany/sdk-typescript/commit/5790ddffbadb6a53ae11f593b05a985f1d987c13))
+
 ## 0.0.0-alpha.11 (2026-05-15)
 
 Full Changelog: [v0.0.0-alpha.10...v0.0.0-alpha.11](https://github.com/promptingcompany/sdk-typescript/compare/v0.0.0-alpha.10...v0.0.0-alpha.11)
