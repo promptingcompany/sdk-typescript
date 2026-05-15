@@ -23,3 +23,15 @@ Types:
 Methods:
 
 - <code title="post /api/v1/analytics/events">client.v1.analytics.<a href="./src/resources/v1/analytics.ts">createEvent</a>({ ...params }) -> AnalyticsCreateEventResponse</code>
+
+## Apps
+
+### Resources
+
+Types:
+
+- <code><a href="./src/resources/v1/apps/resources.ts">ResourceUpdateResponse</a></code>
+
+Methods:
+
+- <code title="patch /api/v1/apps/{appId}/resources/{resourceId}">client.v1.apps.resources.<a href="./src/resources/v1/apps/resources.ts">update</a>(resourceID, { ...params }) -> ResourceUpdateResponse</code>

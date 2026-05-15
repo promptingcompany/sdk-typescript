@@ -228,14 +228,12 @@ export interface DocumentListParams {
   pathPrefix?: string;
 
   /**
-   * Product ID. At least one of productId or productSlug is required when listing
-   * pages.
+   * Product ID. Provide exactly one of `productId` or `productSlug`.
    */
   productId?: string;
 
   /**
-   * Product slug. At least one of productId or productSlug is required when listing
-   * pages.
+   * Product slug. Provide exactly one of `productId` or `productSlug`.
    */
   productSlug?: string;
 
