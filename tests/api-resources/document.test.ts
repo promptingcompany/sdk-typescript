@@ -10,6 +10,39 @@ const client = new ThePromptingCompany({
 
 describe('resource document', () => {
   // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.document.list({ productId: 'x' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.document.list({
+      productId: 'x',
+      archivedStatus: 'active',
+      domain: 'domain',
+      domainId: 'domainId',
+      hasContent: true,
+      isManual: true,
+      orderBy: 'createdAt',
+      orderByDirection: 'asc',
+      page: 0,
+      pageSize: 0,
+      pathPrefix: 'pathPrefix',
+      q: 'q',
+      query: 'query',
+      status: 'draft',
+      type: 'type',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.document.get('x');
     const rawResponse = await responsePromise.asResponse();
