@@ -35,7 +35,7 @@ resources:
     methods:
       get: get /api/v1/md/{id}
       get_by_path: get /api/v1/md/by-path/{path}
-      list: get /api/v1/site/pages
+      list: get /api/v1/site/pages  # Paginated list of site pages (internal/authenticated)
 
 settings:
   # All generated integration tests that hit the prism mock http server are marked
@@ -53,7 +53,7 @@ client_settings:
     api_key:
       type: string
       nullable: false
-      description: Bearer token (tpc_...) sent as Authorization header for public document access
+      description: Simple API key (tpc_...) sent as Bearer token in Authorization header for public document access
       read_env: TPC_API_KEY
       send_in_header: Authorization
     organization_id:
