@@ -24,6 +24,7 @@ import {
   DocumentListParams,
   DocumentListResponse,
 } from './resources/document';
+import { V1 } from './resources/v1/v1';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -892,9 +893,11 @@ export class ThePromptingCompany {
   static toFile = Uploads.toFile;
 
   document: API.Document = new API.Document(this);
+  v1: API.V1 = new API.V1(this);
 }
 
 ThePromptingCompany.Document = Document;
+ThePromptingCompany.V1 = V1;
 
 export declare namespace ThePromptingCompany {
   export type RequestOptions = Opts.RequestOptions;
@@ -906,4 +909,6 @@ export declare namespace ThePromptingCompany {
     type DocumentGetByPathResponse as DocumentGetByPathResponse,
     type DocumentListParams as DocumentListParams,
   };
+
+  export { V1 as V1 };
 }

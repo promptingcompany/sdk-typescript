@@ -7,3 +7,4 @@ export {
   type DocumentGetByPathResponse,
   type DocumentListParams,
 } from './document';
+export { V1 } from './v1/v1';
