@@ -228,12 +228,14 @@ export interface DocumentListParams {
   pathPrefix?: string;
 
   /**
-   * Product ID. Provide exactly one of `productId` or `productSlug`.
+   * Product ID. Provide exactly one of `productId` or `productSlug` (the server
+   * enforces this at runtime).
    */
   productId?: string;
 
   /**
-   * Product slug. Provide exactly one of `productId` or `productSlug`.
+   * Product slug. Provide exactly one of `productId` or `productSlug` (the server
+   * enforces this at runtime).
    */
   productSlug?: string;
 
