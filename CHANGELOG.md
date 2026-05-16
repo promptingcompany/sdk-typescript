@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2026-05-16)
+
+Full Changelog: [v0.2.1...v0.3.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.2.1...v0.3.0)
+
+### Features
+
+* DEV-1685 feat: support standard x-api-key authentication on /api/v1/md/* endpoints ([89b1229](https://github.com/promptingcompany/sdk-typescript/commit/89b1229703b14df614a50047def51c638190f77b))
+
 ## 0.2.1 (2026-05-15)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/promptingcompany/sdk-typescript/compare/v0.2.0...v0.2.1)
