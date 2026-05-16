@@ -53,43 +53,39 @@ client_settings:
     api_key:
       type: string
       nullable: false
-      description: Simple API key (tpc_...) sent as Bearer token in Authorization header for public document access
+      description: API key (tpc_...) used for authentication. Sent via Authorization header for public document endpoints and via x-api-key header for organization-scoped endpoints.
       read_env: TPC_API_KEY
       send_in_header: Authorization
+      auth:
+        security_scheme: apiKeyAuth
+
     organization_id:
       type: string
       nullable: true
       description: Organization ID sent as X-Tpc-Organization-Id header
       read_env: TPC_ORGANIZATION_ID
       send_in_header: 'X-Tpc-Organization-Id'
+
     organization_slug:
       type: string
       nullable: true
       description: Organization slug sent as X-Tpc-Organization-Slug header
       read_env: TPC_ORGANIZATION_SLUG
       send_in_header: 'X-Tpc-Organization-Slug'
+
     product_id:
       type: string
       nullable: true
       description: Product ID sent as X-Tpc-Product-Id header
       read_env: TPC_PRODUCT_ID
       send_in_header: 'X-Tpc-Product-Id'
+
     product_slug:
       type: string
       nullable: true
       description: Product slug sent as X-Tpc-Product-Slug header
       read_env: TPC_PRODUCT_SLUG
       send_in_header: 'X-Tpc-Product-Slug'
-
-    # Internal / authenticated API keys (wired to OpenAPI securitySchemes to silence lint warnings)
-    organization_api_key:
-      type: string
-      nullable: true
-      auth:
-        security_scheme: apiKeyAuth
-      description: Organization-scoped API key (x-api-key header) for authenticated internal API access
-      read_env: TPC_ORGANIZATION_API_KEY
-      send_in_header: X-Api-Key
 
     bearer_token:
       type: string
