@@ -24,6 +24,7 @@ import ThePromptingCompany from '@promptingcompany/sdk';
 
 const client = new ThePromptingCompany({
   apiKey: 'My API Key',
+  organizationAPIKey: process.env['TPC_ORGANIZATION_API_KEY'], // This is the default and can be omitted
   environment: 'dev', // defaults to 'production'
 });
 
@@ -42,6 +43,7 @@ import ThePromptingCompany from '@promptingcompany/sdk';
 
 const client = new ThePromptingCompany({
   apiKey: 'My API Key',
+  organizationAPIKey: process.env['TPC_ORGANIZATION_API_KEY'], // This is the default and can be omitted
   environment: 'dev', // defaults to 'production'
 });
 

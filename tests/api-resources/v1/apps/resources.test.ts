@@ -23,6 +23,10 @@ describe('resource resources', () => {
 
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
-    const response = await client.v1.apps.resources.update('x', { appId: 'x', displayName: 'x' });
+    const response = await client.v1.apps.resources.update('x', {
+      appId: 'x',
+      displayName: 'x',
+      slug: 'slug',
+    });
   });
 });
