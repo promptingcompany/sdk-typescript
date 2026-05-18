@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 (2026-05-18)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* DEV-1685 feat: support X-Tpc-Product-Id/Slug headers as product scoping fallback when using x-api-key on /api/v1/md/* ([ce4dbd8](https://github.com/promptingcompany/sdk-typescript/commit/ce4dbd804bff201532afb8bf0fd9f99738548eb9))
+
+
+### Chores
+
+* remove organizationAPIKey in favor of single apiKey ([72f3ca9](https://github.com/promptingcompany/sdk-typescript/commit/72f3ca945645cc5a18bfdca1449a90d39dbb4afc))
+
 ## 0.3.0 (2026-05-16)
 
 Full Changelog: [v0.2.1...v0.3.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.2.1...v0.3.0)
