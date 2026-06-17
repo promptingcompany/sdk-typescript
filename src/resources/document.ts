@@ -18,14 +18,18 @@ export class Document extends APIResource {
   }
 
   /**
-   * Get public markdown content by ID
+   * Retrieves public markdown content by ID. Supports standard x-api-key
+   * authentication (productId/productSlug via query param or X-Tpc-Product-_ headers
+   * as fallback) as well as the legacy X-Tpc-_ header model.
    */
   get(id: string, options?: RequestOptions): APIPromise<DocumentGetResponse> {
     return this._client.get(path`/api/v1/md/${id}`, options);
   }
 
   /**
-   * Get public markdown content by path
+   * Retrieves public markdown content by file path. Supports standard x-api-key
+   * authentication (productId/productSlug via query param or X-Tpc-Product-_ headers
+   * as fallback) as well as the legacy X-Tpc-_ header model.
    */
   getByPath(path_: string, options?: RequestOptions): APIPromise<DocumentGetByPathResponse> {
     return this._client.get(path`/api/v1/md/by-path/${path_}`, options);

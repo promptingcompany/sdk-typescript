@@ -37,6 +37,8 @@ export namespace ResourceUpdateResponse {
 
     resourceType: 'product';
 
+    slug: string;
+
     updatedAt: string;
 
     deletedAt?: string | null;
@@ -55,6 +57,11 @@ export interface ResourceUpdateParams {
    * Body param
    */
   displayName?: string;
+
+  /**
+   * Body param
+   */
+  slug?: string;
 }
 
 export declare namespace Resources {
