@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.4.0 (2026-06-17)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* DEV-1685 feat: support X-Tpc-Product-Id/Slug headers as product scoping fallback when using x-api-key on /api/v1/md/* ([ce4dbd8](https://github.com/promptingcompany/sdk-typescript/commit/ce4dbd804bff201532afb8bf0fd9f99738548eb9))
+
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([0a2b49b](https://github.com/promptingcompany/sdk-typescript/commit/0a2b49b83a0b95d3fe01c0e18306a3971a8d5794))
+* **typescript:** upgrade tsc-multi so that it works with Node 26 ([0bf9e4a](https://github.com/promptingcompany/sdk-typescript/commit/0bf9e4a02ed6e84e50afbdad26083ab966c9dab2))
+
+
+### Chores
+
+* remove organizationAPIKey in favor of single apiKey ([72f3ca9](https://github.com/promptingcompany/sdk-typescript/commit/72f3ca945645cc5a18bfdca1449a90d39dbb4afc))
+* **tests:** remove redundant File import ([9e462e2](https://github.com/promptingcompany/sdk-typescript/commit/9e462e269669b8c43d2c16bf208a962e36423753))
+
 ## 0.3.0 (2026-05-16)
 
 Full Changelog: [v0.2.1...v0.3.0](https://github.com/promptingcompany/sdk-typescript/compare/v0.2.1...v0.3.0)
